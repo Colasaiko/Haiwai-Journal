@@ -14,6 +14,7 @@ export interface Post {
   coverImage: string;
   author: string;
   content: string;
+  brands?: string[];
 }
 
 export interface Category {
@@ -40,6 +41,7 @@ export function getPostBySlug(slug: string): Post {
     category: data.category,
     coverImage: data.coverImage,
     author: data.author || '海外志编辑部',
+    brands: data.brands || [],
     content,
   };
 }

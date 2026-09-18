@@ -111,13 +111,14 @@ export default function Home() {
             ))}
           </ul>
 
-          {/* Compare Entry */}
-          <div className="mt-12 bg-slate-100 p-8 border border-slate-200 text-center">
-            <h3 className="text-xl font-bold mb-2">品牌对比中心</h3>
-            <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 uppercase tracking-wider font-semibold mb-4">即将上线</span>
-            <p className="text-sm text-slate-600 mb-6">支持多维度对比，帮助更清晰理解不同品牌的定位、特点与适合人群。</p>
-            <Link href="/compare" className="inline-block bg-slate-900 text-white px-6 py-2 text-sm font-medium hover:bg-slate-800 transition-colors">了解更多</Link>
-          </div>
+            <div className="mt-12 bg-slate-100 p-8 border border-slate-200 text-center">
+              <h3 className="text-xl font-bold mb-2">品牌与对比中心</h3>
+              <p className="text-sm text-slate-600 mb-6">浏览收录品牌档案，或进行多维度特点对比，帮助您更清晰地选择。</p>
+              <div className="flex justify-center gap-4">
+                <Link href="/brands" className="inline-block bg-white border border-slate-300 text-slate-700 px-6 py-2 text-sm font-medium hover:bg-slate-50 transition-colors">浏览品牌库</Link>
+                <Link href="/compare" className="inline-block bg-slate-900 text-white px-6 py-2 text-sm font-medium hover:bg-slate-800 transition-colors">品牌对比</Link>
+              </div>
+            </div>
         </section>
       </div>
 

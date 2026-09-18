@@ -13,6 +13,7 @@ export default function Header() {
     { name: 'Clash 教程', href: '/clash' },
     { name: '软件工具', href: '/tools' },
     { name: '海外指南', href: '/guides' },
+    { name: '品牌库', href: '/brands' },
     { name: '品牌对比', href: '/compare' },
     { name: 'FAQ常见问题', href: '/faq' },
     { name: '关于', href: '/about' },

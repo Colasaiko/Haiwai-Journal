@@ -24,6 +24,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link href="/tools" className="hover:text-white transition-colors">软件工具</Link></li>
               <li><Link href="/guides" className="hover:text-white transition-colors">海外指南</Link></li>
+              <li><Link href="/brands" className="hover:text-white transition-colors">品牌库</Link></li>
               <li><Link href="/compare" className="hover:text-white transition-colors">品牌对比</Link></li>
               <li><Link href="/faq" className="hover:text-white transition-colors">FAQ 常见问题</Link></li>
             </ul>
