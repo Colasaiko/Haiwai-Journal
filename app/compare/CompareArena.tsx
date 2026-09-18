@@ -43,7 +43,7 @@ export default function CompareArena({ allBrands }: Props) {
     } else {
       params.delete('brands');
     }
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   const addBrand = (id: string) => {
