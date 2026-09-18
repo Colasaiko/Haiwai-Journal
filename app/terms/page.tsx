@@ -1,0 +1,2 @@
+export const metadata = { title: '使用条款｜海外志', description: '海外志使用条款。', alternates: { canonical: 'https://haiwaijichang.online/terms' } };
+export default function Terms() { return <div className="max-w-3xl mx-auto p-8"><h1 className="text-3xl font-bold mb-6">使用条款</h1><p>本网站提供的信息仅供学习与交流使用，不构成任何商业建议。</p></div> }

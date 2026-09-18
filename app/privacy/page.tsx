@@ -1,0 +1,2 @@
+export const metadata = { title: '隐私政策｜海外志', description: '海外志隐私政策。', alternates: { canonical: 'https://haiwaijichang.online/privacy' } };
+export default function Privacy() { return <div className="max-w-3xl mx-auto p-8"><h1 className="text-3xl font-bold mb-6">隐私政策</h1><p>这是一个独立的个人博客。我们尊重您的隐私，不会收集敏感信息。</p></div> }
