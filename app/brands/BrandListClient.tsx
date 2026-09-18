@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Brand } from '@/lib/brands';
+import type { Brand } from '@/lib/brands';
 
 interface BrandListClientProps {
   initialBrands: Brand[];

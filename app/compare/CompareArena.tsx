@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
-import { Brand } from '@/lib/brands';
+import type { Brand } from '@/lib/brands';
 import Link from 'next/link';
 
 interface Props {
