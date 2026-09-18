@@ -126,31 +126,31 @@ export default function Home() {
       <section className="pt-8">
          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             <Link href="/airport-observation" className="relative h-32 group overflow-hidden">
-              <Image src="/images/nav-airport.jpg" alt="机场观察" fill className="object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" />
+              <Image src="/images/nav-airport-v2.jpg" alt="机场观察" fill className="object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" />
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <span className="text-white font-bold tracking-wider shadow-sm">机场观察</span>
               </div>
             </Link>
             <Link href="/network" className="relative h-32 group overflow-hidden">
-              <Image src="/images/nav-network.jpg" alt="网络知识" fill className="object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" />
+              <Image src="/images/nav-network-v2.jpg" alt="网络知识" fill className="object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" />
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <span className="text-white font-bold tracking-wider shadow-sm">网络知识</span>
               </div>
             </Link>
             <Link href="/clash" className="relative h-32 group overflow-hidden">
-              <Image src="/images/nav-clash.jpg" alt="Clash教程" fill className="object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" />
+              <Image src="/images/nav-clash-v2.jpg" alt="Clash教程" fill className="object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" />
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <span className="text-white font-bold tracking-wider shadow-sm">Clash 教程</span>
               </div>
             </Link>
             <Link href="/tools" className="relative h-32 group overflow-hidden">
-              <Image src="/images/nav-tools.jpg" alt="软件工具" fill className="object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" />
+              <Image src="/images/nav-tools-v2.jpg" alt="软件工具" fill className="object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" />
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <span className="text-white font-bold tracking-wider shadow-sm">软件工具</span>
               </div>
             </Link>
             <Link href="/guides" className="relative h-32 group overflow-hidden col-span-2 md:col-span-1">
-              <Image src="/images/nav-guides.jpg" alt="海外指南" fill className="object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" />
+              <Image src="/images/nav-guides-v2.jpg" alt="海外指南" fill className="object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" />
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <span className="text-white font-bold tracking-wider shadow-sm">海外指南</span>
               </div>
