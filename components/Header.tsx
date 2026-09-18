@@ -1,10 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import SearchDialog from './SearchDialog';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [mobileSearchQuery, setMobileSearchQuery] = useState('');
+  const router = useRouter();
+
+  // Cmd+K global listener
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const navLinks = [
     { name: '首页', href: '/' },
@@ -44,10 +61,15 @@ export default function Header() {
         <div className="flex items-center space-x-4">
           <p className="hidden xl:block text-xs text-slate-400 italic mr-4">探索更大的世界，<br/>从更好的网络开始。</p>
           
-          <button className="hidden sm:block text-slate-500 hover:text-slate-900 focus:outline-none">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button 
+            onClick={() => setIsSearchOpen(true)}
+            className="hidden sm:flex items-center space-x-2 text-slate-500 hover:text-slate-900 focus:outline-none bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
+            <span className="text-xs font-medium">搜索</span>
+            <kbd className="hidden lg:inline-block font-sans text-[10px] bg-white border border-slate-200 rounded px-1.5 py-0.5 shadow-sm ml-1 text-slate-400">⌘K</kbd>
           </button>
 
           {/* Mobile menu button */}
@@ -82,16 +104,35 @@ export default function Header() {
             ))}
             
             <div className="mt-4 pt-4 border-t border-slate-100">
-               <div className="relative">
-                  <input type="text" placeholder="搜索内容..." className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                  <svg className="w-5 h-5 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-               </div>
+               <form 
+                 onSubmit={(e) => {
+                   e.preventDefault();
+                   if (mobileSearchQuery.trim()) {
+                     router.push(`/search?q=${encodeURIComponent(mobileSearchQuery.trim())}`);
+                     setIsMenuOpen(false);
+                   }
+                 }}
+                 className="relative"
+               >
+                  <input 
+                    type="text" 
+                    value={mobileSearchQuery}
+                    onChange={(e) => setMobileSearchQuery(e.target.value)}
+                    placeholder="搜索内容..." 
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  />
+                  <button type="submit" className="absolute left-3 top-2.5 text-slate-400">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </button>
+               </form>
             </div>
           </nav>
         </div>
       )}
+
+      <SearchDialog isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </header>
   );
 }
