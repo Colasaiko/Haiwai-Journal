@@ -14,7 +14,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
   }));
 
-  const routes = ['', '/articles', '/about', '/compare', '/privacy', '/terms'].map((route) => ({
+  const routes = [
+    '', '/articles', '/about', '/compare', '/privacy', '/terms',
+    '/brands', '/faq', '/search', '/start-here', '/methodology', '/disclosure'
+  ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
   }));

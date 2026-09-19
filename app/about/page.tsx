@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export const metadata = {
   title: '关于海外志｜海外志',
   description: '关于海外志，这是一个围绕海外网络、机场、Clash、工具与数字生活经验做知识整理与内容记录的中文独立 Blog。',
@@ -12,6 +14,11 @@ export default function About() {
         <p>海外志（Haiwai Journal）是一个围绕海外网络、机场、Clash、工具与数字生活经验做知识整理与内容记录的中文独立 Blog。</p>
         <p>在这个信息冗余的时代，我们希望用杂志感、编辑感的方式，提供干净、克制、有深度的阅读体验。我们相信，更好的网络可以让更多人更轻松地连接世界。</p>
         <p>我们坚持客观的内容记录，不提供虚假测速、不编造排行。希望能成为你探索数字生活的好帮手。</p>
+        <hr className="my-8 border-slate-200" />
+        <p className="text-base text-slate-500">
+          了解我们的内容整理方式 <Link href="/methodology" className="text-blue-600 hover:underline">→ 内容与资料方法</Link><br />
+          推广与邀请链接说明 <Link href="/disclosure" className="text-blue-600 hover:underline">→ 推广说明</Link>
+        </p>
       </div>
     </div>
   );

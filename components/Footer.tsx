@@ -34,7 +34,10 @@ export default function Footer() {
         <div>
           <h3 className="text-white font-semibold mb-4">关于海外志</h3>
           <ul className="space-y-2 text-sm mb-6">
+            <li><Link href="/start-here" className="hover:text-white transition-colors">从这里开始</Link></li>
             <li><Link href="/about" className="hover:text-white transition-colors">关于我们</Link></li>
+            <li><Link href="/methodology" className="hover:text-white transition-colors">内容与资料方法</Link></li>
+            <li><Link href="/disclosure" className="hover:text-white transition-colors">推广说明</Link></li>
             <li><Link href="/privacy" className="hover:text-white transition-colors">隐私政策</Link></li>
             <li><Link href="/terms" className="hover:text-white transition-colors">使用条款</Link></li>
             <li><Link href="/sitemap.xml" className="hover:text-white transition-colors">Sitemap</Link></li>

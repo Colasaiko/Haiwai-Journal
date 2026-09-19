@@ -60,7 +60,7 @@ export default function Home() {
             <h2 className="text-3xl font-bold mb-6">新手如何选择适合自己的机场服务？</h2>
             <p className="text-slate-300 mb-8 leading-relaxed">面对众多机场品牌，新手常常不知道该如何选择。本文从使用器具、线路类别、稳定性、价格区间等方面，帮助理解判断逻辑，找到更适合自己的服务。</p>
             <div>
-              <Link href="/airport-observation/what-is-airport-service" className="inline-block border border-white/30 text-white px-8 py-3 text-sm uppercase tracking-wide hover:bg-white hover:text-slate-900 transition-colors">查看专题</Link>
+              <Link href="/start-here" className="inline-block border border-white/30 text-white px-8 py-3 text-sm uppercase tracking-wide hover:bg-white hover:text-slate-900 transition-colors">查看专题</Link>
             </div>
             <p className="mt-12 text-slate-400 font-serif italic border-l-2 border-blue-500 pl-4">“更好的网络，是通往世界的另一种方式。”</p>
           </div>
