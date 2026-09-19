@@ -15,6 +15,7 @@ export interface Post {
   author: string;
   content: string;
   brands?: string[];
+  readingTime?: number;
 }
 
 export interface Category {
@@ -43,6 +44,7 @@ export function getPostBySlug(slug: string): Post {
     author: data.author || '海外志编辑部',
     brands: data.brands || [],
     content,
+    readingTime: Math.max(1, Math.ceil(content.length / 350)),
   };
 }
 

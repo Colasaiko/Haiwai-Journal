@@ -72,7 +72,7 @@ export default function Home() {
         <section className="lg:col-span-2">
           <div className="flex justify-between items-end mb-8 border-b-2 border-slate-900 pb-2">
             <h2 className="text-2xl font-bold uppercase tracking-tight">最新文章</h2>
-            <Link href="/airport-observation" className="text-sm text-slate-500 hover:text-slate-900">查看全部 &rarr;</Link>
+            <Link href="/articles" className="text-sm text-slate-500 hover:text-slate-900">查看全部 &rarr;</Link>
           </div>
           <div className="space-y-8">
             {latestPosts.map(post => (
