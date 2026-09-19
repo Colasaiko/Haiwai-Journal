@@ -3,7 +3,10 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
 const components = {
-  h2: ({ children, ...props }: any) => {
+  h1: ({ children, ...props }: React.ComponentProps<any>) => {
+    return <h2 {...props} className="text-2xl font-bold text-slate-900 mt-12 mb-6 scroll-mt-24">{children}</h2>;
+  },
+  h2: ({ children, ...props }: React.ComponentProps<any>) => {
     return <h2 {...props} className="text-2xl font-bold text-slate-900 mt-12 mb-6 scroll-mt-24">{children}</h2>;
   },
   h3: ({ children, ...props }: any) => (
@@ -57,7 +60,10 @@ const components = {
 };
 
 export default function MDXRenderer({ source }: { source: string }) {
-  let processedSource = source
+  // Strip the first top-level H1 to avoid double H1 with the page title
+  let processedSource = source.replace(/^\s*#\s+[^\n]+/m, '');
+
+  processedSource = processedSource
     .replace(/^>\s*\[!NOTE\]\s*\n(>.*\n)*/gm, (match) => {
       const content = match.replace(/^>\s*\[!NOTE\]\s*\n?/gm, '').replace(/^>\s?/gm, '');
       return `<div className="border-l-4 border-blue-500 bg-blue-50 p-5 rounded-r-xl my-8">\n<div className="flex items-center font-bold text-blue-800 mb-2"><span className="mr-2">📝</span> NOTE</div>\n\n${content}\n</div>\n\n`;

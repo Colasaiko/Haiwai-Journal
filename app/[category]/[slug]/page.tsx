@@ -67,13 +67,12 @@ export default function ArticlePage({ params }: { params: { category: string, sl
   const relatedPosts = getRelatedPosts(post);
   const { prev, next } = getNextAndPrevPosts(post);
 
-  const jsonLd = {
+  const jsonLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    dateModified: post.updated || post.date,
     author: {
       '@type': 'Organization',
       name: post.author
@@ -84,6 +83,10 @@ export default function ArticlePage({ params }: { params: { category: string, sl
       '@id': `https://haiwaijichang.online/${params.category}/${params.slug}`
     }
   };
+
+  if (post.updated) {
+    jsonLd.dateModified = post.updated;
+  }
 
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',

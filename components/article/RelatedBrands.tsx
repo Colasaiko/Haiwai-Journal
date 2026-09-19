@@ -38,7 +38,7 @@ export default function RelatedBrands({ brandIds }: RelatedBrandsProps) {
               </div>
               <div className="mt-auto flex items-center space-x-3 pt-3 border-t border-slate-50">
                 <Link 
-                  href={`/brands/${brand.id}`}
+                  href={`/brands/${brand.slug}`}
                   className="flex-1 text-center text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 py-1.5 rounded transition-colors"
                 >
                   品牌档案
