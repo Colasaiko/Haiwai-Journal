@@ -12,9 +12,12 @@ export interface Post {
   date: string;
   category: string;
   coverImage: string;
+  coverAlt?: string;
   author: string;
   content: string;
   brands?: string[];
+  tags?: string[];
+  updated?: string;
   readingTime?: number;
 }
 
@@ -39,10 +42,13 @@ export function getPostBySlug(slug: string): Post {
     title: data.title,
     description: data.description,
     date: data.date,
+    updated: data.updated,
     category: data.category,
     coverImage: data.coverImage,
+    coverAlt: data.coverAlt,
     author: data.author || '海外志编辑部',
     brands: data.brands || [],
+    tags: data.tags || [],
     content,
     readingTime: Math.max(1, Math.ceil(content.length / 350)),
   };
