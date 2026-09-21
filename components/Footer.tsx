@@ -50,8 +50,9 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-slate-800 text-sm text-center text-slate-500">
-        &copy; 2026 海外志 / haiwaijichang.online. All rights reserved.
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-slate-800 text-sm flex flex-col sm:flex-row justify-between items-center text-slate-500 gap-4">
+        <div>&copy; {new Date().getFullYear()} 海外志 / haiwaijichang.online. All rights reserved.</div>
+        <Link href="/site-check" className="text-slate-700 hover:text-slate-500 transition-colors text-xs">内容检查</Link>
       </div>
     </footer>
   );
