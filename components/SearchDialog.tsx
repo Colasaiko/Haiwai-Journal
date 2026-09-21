@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { SearchItem, search } from '@/lib/search';
@@ -13,13 +14,20 @@ interface SearchDialogProps {
 
 export default function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
   const [query, setQuery] = useState('');
   const [index, setIndex] = useState<SearchItem[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  useEffect(() => {
     if (isOpen) {
+      document.body.style.overflow = 'hidden';
       setQuery('');
       setSelectedIndex(-1);
       setTimeout(() => inputRef.current?.focus(), 50);
@@ -30,7 +38,13 @@ export default function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
           .then(data => setIndex(data))
           .catch(console.error);
       }
+    } else {
+      document.body.style.overflow = '';
     }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isOpen, index.length]);
 
   const results = useMemo(() => query.trim().length >= 2 ? search(index, query).slice(0, 8) : [], [query, index]);
@@ -41,14 +55,7 @@ export default function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isOpen) {
-        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-          e.preventDefault();
-          onClose(); // In a real app we'd have a global state, but here onClose isn't exactly toggle. Wait.
-          // Wait, the global listener should be in Header. This is just the dialog.
-        }
-        return;
-      }
+      if (!isOpen) return;
 
       if (e.key === 'Escape') {
         onClose();
@@ -74,12 +81,12 @@ export default function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, query, selectedIndex, results, router, onClose]);
 
-  if (!isOpen) return null;
+  if (!mounted || !isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 z-[100] flex items-start justify-center pt-20 px-4 sm:px-6">
-      <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={onClose}></div>
-      <div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh] animate-[fadeinup_0.2s_ease-out_forwards]">
+  return createPortal(
+    <div id="search-dialog" className="fixed inset-0 z-[9999] flex items-start justify-center pt-20 px-4 sm:px-6" role="dialog" aria-modal="true">
+      <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-0" onClick={onClose}></div>
+      <div className="relative z-10 w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh] animate-[fadeinup_0.2s_ease-out_forwards]">
         
         <div className="flex items-center px-4 py-4 border-b border-slate-100">
           <Search className="w-5 h-5 text-slate-400 mr-3 shrink-0" />
@@ -88,10 +95,10 @@ export default function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="搜索文章、品牌或关键词..."
+            placeholder="搜索文章、品牌或关键字..."
             className="flex-1 bg-transparent border-none focus:outline-none text-lg text-slate-900 placeholder:text-slate-400"
           />
-          <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition-colors ml-2">
+          <button aria-label="Close" onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition-colors ml-2">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -138,7 +145,7 @@ export default function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
         
         {query.trim().length >= 2 && results.length === 0 && (
           <div className="px-6 py-12 text-center text-slate-500">
-            没有找到与 “{query}” 相关的内容
+            没有找到与 “{query}” 相关的内容。
           </div>
         )}
 
@@ -160,6 +167,7 @@ export default function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
           <span className="flex items-center"><kbd className="font-sans px-1.5 py-0.5 rounded border border-slate-200 bg-white mr-1.5 shadow-sm">Esc</kbd> 关闭</span>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

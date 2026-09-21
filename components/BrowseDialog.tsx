@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { SearchItem } from '@/lib/search';
 import { Search, X, BookOpen, Clock, Lightbulb, ExternalLink, Compass } from 'lucide-react';
@@ -11,6 +12,7 @@ interface BrowseDialogProps {
 }
 
 export default function BrowseDialog({ isOpen, onClose }: BrowseDialogProps) {
+  const [mounted, setMounted] = useState(false);
   const [index, setIndex] = useState<SearchItem[]>([]);
   const [filterQuery, setFilterQuery] = useState('');
   const [activeTab, setActiveTab] = useState('All');
@@ -18,7 +20,13 @@ export default function BrowseDialog({ isOpen, onClose }: BrowseDialogProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  useEffect(() => {
     if (isOpen) {
+      document.body.style.overflow = 'hidden';
       if (index.length === 0) {
         fetch('/search-index.json')
           .then(res => res.json())
@@ -26,16 +34,20 @@ export default function BrowseDialog({ isOpen, onClose }: BrowseDialogProps) {
           .catch(err => console.error('Failed to fetch search index', err));
       }
       setTimeout(() => inputRef.current?.focus(), 100);
+    } else {
+      document.body.style.overflow = '';
     }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isOpen, index.length]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (isOpen && e.key === 'Escape') onClose();
     };
-    if (isOpen) {
-      window.addEventListener('keydown', handleKeyDown);
-    }
+    window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
@@ -83,18 +95,19 @@ export default function BrowseDialog({ isOpen, onClose }: BrowseDialogProps) {
 
   const displayItems = quickFilter === 'Recent' && activeTab === 'All' ? filteredItems.slice(0, 20) : filteredItems;
 
-  if (!isOpen) return null;
+  if (!mounted || !isOpen) return null;
 
-  return (
+  return createPortal(
     <div 
-      className="fixed inset-0 z-[60] flex flex-col pt-16 bg-slate-900/40 backdrop-blur-sm" 
-      onClick={onClose}
+      id="browse-dialog"
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-start pt-20 px-4 pb-4 md:px-6 pointer-events-none" 
       role="dialog"
       aria-modal="true"
       aria-label="Content Browser"
     >
+      <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm pointer-events-auto" onClick={onClose}></div>
       <div 
-        className="mx-auto w-full max-w-7xl bg-[#FAF9F6] shadow-2xl overflow-hidden flex flex-col max-h-[85vh] rounded-b-2xl border-x border-b border-slate-200"
+        className="relative z-10 w-full max-w-7xl bg-[#FAF9F6] shadow-2xl overflow-hidden flex flex-col h-full max-h-[85vh] rounded-2xl border border-slate-200 pointer-events-auto animate-[fadeinup_0.2s_ease-out_forwards]"
         onClick={e => e.stopPropagation()}
       >
         {/* Header Section */}
@@ -256,6 +269,7 @@ export default function BrowseDialog({ isOpen, onClose }: BrowseDialogProps) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

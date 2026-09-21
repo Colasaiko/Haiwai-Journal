@@ -19,6 +19,7 @@ export default function Header() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
+        setIsBrowseOpen(false);
         setIsSearchOpen(true);
       }
     };
@@ -65,7 +66,9 @@ export default function Header() {
           <p className="hidden xl:block text-xs text-slate-400 italic mr-4">探索更大的世界，<br/>从更好的网络开始。</p>
           
           <button 
-            onClick={() => setIsBrowseOpen(true)}
+            onClick={() => { setIsSearchOpen(false); setIsBrowseOpen(true); }}
+            aria-expanded={isBrowseOpen}
+            aria-controls="browse-dialog"
             className="hidden sm:flex items-center space-x-2 text-slate-500 hover:text-blue-600 focus:outline-none hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors"
           >
             <BookOpen className="w-4 h-4" />
@@ -73,7 +76,9 @@ export default function Header() {
           </button>
 
           <button 
-            onClick={() => setIsSearchOpen(true)}
+            onClick={() => { setIsBrowseOpen(false); setIsSearchOpen(true); }}
+            aria-expanded={isSearchOpen}
+            aria-controls="search-dialog"
             className="hidden sm:flex items-center space-x-2 text-slate-500 hover:text-slate-900 focus:outline-none bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -104,7 +109,9 @@ export default function Header() {
         <div className="lg:hidden absolute top-16 left-0 w-full bg-white shadow-xl border-b border-slate-200">
           <nav className="px-4 pt-4 pb-6 flex flex-col space-y-2 max-h-[80vh] overflow-y-auto">
             <button 
-              onClick={() => { setIsBrowseOpen(true); setIsMenuOpen(false); }}
+              onClick={() => { setIsSearchOpen(false); setIsBrowseOpen(true); setIsMenuOpen(false); }}
+              aria-expanded={isBrowseOpen}
+              aria-controls="browse-dialog"
               className="flex items-center justify-center w-full bg-blue-50 text-blue-700 py-3 rounded-xl text-base font-bold mb-4 shadow-sm"
             >
               <BookOpen className="w-5 h-5 mr-2" />
