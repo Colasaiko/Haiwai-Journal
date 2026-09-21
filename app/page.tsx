@@ -9,16 +9,17 @@ export default function Home() {
   const latestPosts = posts.slice(0, 4);
   const weeklyReads = posts.slice(4, 9);
 
+  const catMap: Record<string, string> = { "airport-observation": "机场测评", "network": "网络知识", "clash": "Clash 教程", "tools": "软件工具", "guides": "海外指南" };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+      <h1 className="text-3xl font-bold text-slate-900 px-4 md:px-0 mt-4 mb-2">海外志｜海外网络、机场测评与数字工具指南</h1>
       
       {/* Hero */}
       <section className="relative h-[60vh] min-h-[500px] w-full bg-slate-900 overflow-hidden flex items-end">
         <Image src={heroPost.coverImage} alt={heroPost.title} fill className="object-cover opacity-60" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
-        <div className="absolute top-4 left-4 z-20">
-          <h1 className="sr-only">2026 机场推荐与天梯排行榜：稳定、便宜、专线高速梯子精选</h1>
-        </div>
+        
         <div className="relative z-10 w-full p-8 md:p-16 flex flex-col md:flex-row justify-between items-end">
           <div className="max-w-3xl">
             <span className="text-white/80 uppercase tracking-widest text-xs font-semibold mb-4 block">本期推荐</span>
@@ -40,7 +41,7 @@ export default function Home() {
               <Image src={post.coverImage} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex flex-col flex-grow">
-              <span className="text-xs text-blue-600 uppercase tracking-wider mb-2 font-semibold">{post.category}</span>
+              <span className="text-xs text-blue-600 uppercase tracking-wider mb-2 font-semibold">{catMap[post.category] || post.category}</span>
               <h3 className="text-lg font-bold text-slate-900 leading-snug mb-3 group-hover:text-blue-700 transition-colors">{post.title}</h3>
               <span className="mt-auto text-xs text-slate-500">{post.date}</span>
             </div>
@@ -82,7 +83,7 @@ export default function Home() {
                 </Link>
                 <div className="sm:w-2/3 flex flex-col justify-center">
                   <div className="flex items-center space-x-3 mb-2">
-                    <span className="text-xs font-semibold text-blue-600 uppercase tracking-wider">{post.category}</span>
+                    <span className="text-xs font-semibold text-blue-600 uppercase tracking-wider">{catMap[post.category] || post.category}</span>
                     <span className="text-xs text-slate-400">{post.date}</span>
                   </div>
                   <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors"><Link href={`/${post.category}/${post.slug}`}>{post.title}</Link></h3>
@@ -104,7 +105,7 @@ export default function Home() {
                   <span className="text-3xl font-serif text-slate-300 font-bold group-hover:text-blue-200 transition-colors">0{i+1}</span>
                   <div>
                     <h3 className="font-bold text-slate-800 group-hover:text-blue-700 transition-colors leading-tight mb-1">{post.title}</h3>
-                    <p className="text-xs text-slate-500">{post.category}</p>
+                    <p className="text-xs text-slate-500">{catMap[post.category] || post.category}</p>
                   </div>
                 </Link>
               </li>

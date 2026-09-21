@@ -7,17 +7,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
   
   const posts = getAllPosts().map((post) => ({
     url: `${baseUrl}/${post.category}/${post.slug}`,
-    lastModified: new Date(),
+    lastModified: post.updated ? new Date(post.updated) : (post.date ? new Date(post.date) : new Date()),
   }));
 
   const categories = getAllCategories().map((cat) => ({
     url: `${baseUrl}/${cat.slug}`,
-    lastModified: new Date(),
+    
   }));
   
   const brands = getAllBrands().map((brand) => ({
     url: `${baseUrl}/brands/${brand.slug}`,
-    lastModified: new Date(),
+    
   }));
 
   const routes = [
@@ -25,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/brands', '/faq', '/start-here', '/methodology', '/disclosure'
   ].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
+    
   }));
 
   return [...routes, ...categories, ...brands, ...posts];

@@ -25,7 +25,7 @@ export function generateMetadata({ params }: { params: { category: string, slug:
   try {
     const post = getPostBySlug(params.slug);
     return {
-      title: `${post.title} - ${post.category}｜海外志`,
+      title: `${post.title}｜${getCategoryBySlug(post.category)?.title || "海外志"} - 海外志`,
       description: post.description,
       openGraph: {
         title: post.title,

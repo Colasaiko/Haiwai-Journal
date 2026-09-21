@@ -15,6 +15,17 @@ function getFiles(dir, ext, fileList = []) {
 }
 
 const htmlFiles = getFiles('out', '.html');
+const allHtmlRoutes = new Set();
+htmlFiles.forEach(f => {
+  const p = f.replace(/\\/g, '/').replace(/^out\//, '/').replace(/\.html$/, '');
+  allHtmlRoutes.add(p);
+  allHtmlRoutes.add(p + '/');
+  if (p.endsWith('/index')) {
+    allHtmlRoutes.add(p.replace('/index', ''));
+    allHtmlRoutes.add(p.replace('/index', '/'));
+  }
+});
+allHtmlRoutes.add('/');
 
 const metrics = {
   missingTitle: 0,
@@ -53,7 +64,9 @@ htmlFiles.forEach(file => {
     metrics.missingTitle++;
   } else {
     const title = titleMatch[1];
-    titles[title] = (titles[title] || 0) + 1;
+    if (!file.includes('/go/') && !file.includes('\\go\\')) {
+      titles[title] = (titles[title] || 0) + 1;
+    }
   }
 
   // Description
@@ -62,14 +75,15 @@ htmlFiles.forEach(file => {
     metrics.missingDescription++;
   } else {
     const desc = descMatch[1];
-    descriptions[desc] = (descriptions[desc] || 0) + 1;
+    if (!file.includes('/go/') && !file.includes('\\go\\')) {
+      descriptions[desc] = (descriptions[desc] || 0) + 1;
+    }
   }
 
   // H1
   const h1Matches = content.match(/<h1[^>]*>[\s\S]*?<\/h1>/g);
   if (!h1Matches) {
     if (!file.includes('404')) {
-      // 404 is allowed to not have h1 depending on design, but let's count it anyway
       metrics.missingH1++;
     }
   } else if (h1Matches.length > 1) {
@@ -79,11 +93,18 @@ htmlFiles.forEach(file => {
   // Canonical
   const canonicalMatch = content.match(/<link[^>]*rel="canonical"[^>]*href="([^"]*)"/);
   if (!canonicalMatch) {
-    if (!file.includes('404')) metrics.missingCanonical++;
+    if (!file.includes('404') && !file.includes('/go/') && !file.includes('\\go\\')) {
+      metrics.missingCanonical++;
+    }
   } else {
     const canonical = canonicalMatch[1];
     if (!canonical.startsWith('https://haiwaijichang.online')) {
       metrics.wrongDomainCanonical++;
+    }
+    try {
+      new URL(canonical);
+    } catch {
+      metrics.invalidCanonical++;
     }
   }
 
@@ -93,16 +114,55 @@ htmlFiles.forEach(file => {
   }
 
   // Links
-  const links = content.match(/href="\/[^"]*"/g) || [];
-  metrics.internalLinks += links.length;
+  const links = content.match(/href="([^"]+)"/g) || [];
+  links.forEach(l => {
+    const href = l.replace('href="', '').replace('"', '');
+    if (href.startsWith('/') && !href.startsWith('//') && !href.startsWith('/images') && !href.startsWith('/rss.xml') && !href.startsWith('/sitemap.xml') && !href.startsWith('/icon.png') && !href.startsWith('/_next/') && !href.startsWith('/favicon') && !href.startsWith('/apple-touch-icon')) {
+      metrics.internalLinks++;
+      let target = href.split('?')[0].split('#')[0];
+      if (!allHtmlRoutes.has(target) && target !== '/') {
+        metrics.brokenInternalLinks++;
+        // console.log(`Broken link: ${target} in ${file}`);
+      }
+    }
+  });
 
   if (content.includes('/brands/undefined')) metrics.brandsUndefined++;
+  
+  // Images
+  const imgRegex = /<img[^>]*src="(\/[^"]+)"[^>]*>/g;
+  let m;
+  while ((m = imgRegex.exec(content)) !== null) {
+    let src = m[1].split('?')[0]; // remove query strings
+    if (src.startsWith('/_next/')) continue; // next.js internal
+    const localPath = path.join(process.cwd(), 'out', src);
+    if (!fs.existsSync(localPath)) {
+      metrics.missingLocalImage++;
+    } else {
+      if (fs.statSync(localPath).size === 0) {
+        metrics.emptyImageFiles++;
+      }
+    }
+  }
 
   // Schema
-  if (content.includes('"@type":"BlogPosting"') || content.includes('"@type": "BlogPosting"')) metrics.blogPostingCount++;
-  if (content.includes('"@type":"BreadcrumbList"') || content.includes('"@type": "BreadcrumbList"')) metrics.breadcrumbSchemaCount++;
-  if (content.includes('"@type":"Review"') || content.includes('"@type":"AggregateRating"')) {
-    metrics.fakeReviewRatingSchema++;
+  const schemaRegex = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g;
+  let sm;
+  while ((sm = schemaRegex.exec(content)) !== null) {
+    try {
+      const obj = JSON.parse(sm[1]);
+      const checkType = (type, str) => {
+        if (Array.isArray(type)) return type.includes(str);
+        return type === str;
+      };
+      if (obj['@type'] && checkType(obj['@type'], 'BlogPosting')) metrics.blogPostingCount++;
+      if (obj['@type'] && checkType(obj['@type'], 'BreadcrumbList')) metrics.breadcrumbSchemaCount++;
+      if (obj['@type'] && (checkType(obj['@type'], 'Review') || checkType(obj['@type'], 'AggregateRating'))) {
+        metrics.fakeReviewRatingSchema++;
+      }
+    } catch (e) {
+      metrics.schemaParseErrors++;
+    }
   }
 });
 

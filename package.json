@@ -10,7 +10,8 @@
     "build": "node scripts/build-search-index.js && next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "seo:check": "node scripts/check-seo.js"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.20",
