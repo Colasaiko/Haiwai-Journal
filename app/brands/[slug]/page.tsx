@@ -208,7 +208,7 @@ export default function BrandProfilePage({ params }: Props) {
                 )}
                 <div className="p-6 flex flex-col flex-grow">
                   <div className="flex items-center gap-3 text-xs text-slate-500 mb-3">
-                    <span className="font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">{post.category === 'airport-observation' ? '机场观察' : post.category}</span>
+                    <span className="font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">{post.category === 'airport-observation' ? '机场测评' : post.category}</span>
                     <span>{post.date}</span>
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">

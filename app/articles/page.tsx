@@ -7,7 +7,7 @@ import { ChevronRight } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: '全部文章｜海外志',
-  description: '浏览海外志发布的全部文章，包括机场观察、网络知识、Clash 教程、软件工具与海外数字生活指南。',
+  description: '浏览海外志发布的全部文章，包括机场测评、网络知识、Clash 教程、软件工具与海外数字生活指南。',
   alternates: {
     canonical: 'https://haiwaijichang.online/articles',
   }
@@ -21,7 +21,7 @@ export default function ArticlesPage() {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: '全部文章｜海外志',
-    description: '浏览海外志发布的全部文章，包括机场观察、网络知识、Clash 教程、软件工具与海外数字生活指南。',
+    description: '浏览海外志发布的全部文章，包括机场测评、网络知识、Clash 教程、软件工具与海外数字生活指南。',
     url: 'https://haiwaijichang.online/articles',
     breadcrumb: {
       '@type': 'BreadcrumbList',
@@ -74,7 +74,7 @@ export default function ArticlesPage() {
               </span>
             </div>
             <p className="text-lg text-slate-600 leading-relaxed mb-6">
-              记录海外网络、机场观察、Clash、网络知识与数字工具的长期内容档案。
+              记录海外网络、机场测评、Clash、网络知识与数字工具的长期内容档案。
             </p>
             <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-slate-100 text-sm font-medium text-slate-600">
               目前收录 <span className="text-blue-600 font-bold mx-1.5">{posts.length}</span> 篇文章

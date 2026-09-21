@@ -15,7 +15,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link href="/" className="hover:text-white transition-colors">首页</Link></li>
               <li><Link href="/articles" className="hover:text-white transition-colors">全部文章</Link></li>
-              <li><Link href="/airport-observation" className="hover:text-white transition-colors">机场观察</Link></li>
+              <li><Link href="/airport-observation" className="hover:text-white transition-colors">机场测评</Link></li>
               <li><Link href="/network" className="hover:text-white transition-colors">网络知识</Link></li>
               <li><Link href="/clash" className="hover:text-white transition-colors">Clash 教程</Link></li>
             </ul>

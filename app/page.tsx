@@ -126,9 +126,9 @@ export default function Home() {
       <section className="pt-8">
          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             <Link href="/airport-observation" className="relative h-32 group overflow-hidden">
-              <Image src="/images/nav-airport-v2.jpg" alt="机场观察" fill className="object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" />
+              <Image src="/images/nav-airport-v2.jpg" alt="机场测评" fill className="object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" />
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <span className="text-white font-bold tracking-wider shadow-sm">机场观察</span>
+                <span className="text-white font-bold tracking-wider shadow-sm">机场测评</span>
               </div>
             </Link>
             <Link href="/network" className="relative h-32 group overflow-hidden">

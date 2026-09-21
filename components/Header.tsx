@@ -25,7 +25,7 @@ export default function Header() {
 
   const navLinks = [
     { name: '首页', href: '/' },
-    { name: '机场观察', href: '/airport-observation' },
+    { name: '机场测评', href: '/airport-observation' },
     { name: '网络知识', href: '/network' },
     { name: 'Clash 教程', href: '/clash' },
     { name: '软件工具', href: '/tools' },
