@@ -34,7 +34,7 @@ export default function TiziHubPage() {
             <div className="p-6 bg-slate-50 rounded-xl border border-slate-200">
               <h3 className="text-xl font-bold text-blue-700 mb-2">Clash Verge / Meta</h3>
               <p className="text-slate-600 text-sm mb-4">目前 PC 端最强大、界面最现代的科学上网客户端。支持规则分流，自动更新订阅。</p>
-              <Link href="/clash/windows-clash-common-issues" className="text-blue-600 text-sm font-semibold hover:underline">查看教程 &rarr;</Link>
+              <Link href="/clash/clash-subscription-update-failed" className="text-blue-600 text-sm font-semibold hover:underline">查看教程 &rarr;</Link>
             </div>
             <div className="p-6 bg-slate-50 rounded-xl border border-slate-200">
               <h3 className="text-xl font-bold text-blue-700 mb-2">v2rayN</h3>

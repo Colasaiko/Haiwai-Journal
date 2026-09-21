@@ -19,28 +19,26 @@ export default function ToolsPage() {
     return slugs.map(slug => allPosts.find(p => p.slug === slug)).filter(Boolean) as typeof allPosts;
   };
 
+  const nativeTools = allPosts.filter(p => p.category === 'tools' && p.slug !== 'sing-box-hiddify-airport-recommendations');
+
   const recommendedClients = getPostsBySlugs([
     'sing-box-hiddify-airport-recommendations',
     'v2rayn-airport-recommendations-windows',
     'android-clash-v2rayng-airport-recommendations',
     'mac-clashx-surge-airport-recommendations',
     'shadowrocket-airport-recommendations-2026',
-    'quantumultx-surge-airport-recommendations',
-    'clash-airport-recommendations-2026'
+    'quantumultx-surge-airport-recommendations'
   ]);
 
   const clashTools = getPostsBySlugs([
     'how-to-import-clash-subscription',
     'clash-modes-explained',
     'clash-subscription-update-failed',
-    'clash-airport-recommendations-2026',
-    'android-clash-v2rayng-airport-recommendations',
-    'mac-clashx-surge-airport-recommendations'
+    'clash-airport-recommendations-2026'
   ]);
 
   const desktopTools = getPostsBySlugs([
     'v2rayn-airport-recommendations-windows',
-    'clash-airport-recommendations-2026',
     'mac-clashx-surge-airport-recommendations'
   ]);
 
@@ -54,8 +52,7 @@ export default function ToolsPage() {
   const speedTools = getPostsBySlugs([
     'how-to-test-airport-speed',
     'how-to-read-speed-test-results',
-    'is-lower-latency-always-better',
-    'clash-subscription-update-failed'
+    'is-lower-latency-always-better'
   ]);
 
   return (
@@ -75,10 +72,34 @@ export default function ToolsPage() {
         </div>
       </div>
 
+      {/* Section 0: 完整软件教程 (Native Tools) */}
+      <section>
+        <div className="mb-8 border-b-2 border-blue-600 pb-2 flex justify-between items-end">
+          <h2 className="text-2xl font-bold uppercase tracking-tight">完整软件教程</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {nativeTools.map(post => (
+            <Link key={post.slug} href={`/${post.category}/${post.slug}`} className="group flex flex-col h-full bg-slate-50 border border-slate-200 hover:border-blue-300 transition-colors rounded-lg overflow-hidden shadow-sm hover:shadow-md">
+              <div className="relative h-32 w-full overflow-hidden shrink-0">
+                <Image src={post.coverImage} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+              </div>
+              <div className="p-4 flex flex-col flex-grow">
+                <span className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-2">{catMap[post.category] || post.category}</span>
+                <h3 className="text-base font-bold text-slate-900 leading-snug mb-2 group-hover:text-blue-700 transition-colors line-clamp-2">{post.title}</h3>
+                <p className="text-sm text-slate-600 line-clamp-2 mb-3">{post.description}</p>
+                <span className="mt-auto text-xs text-slate-500 font-medium flex items-center">
+                  阅读全文 <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* Section 1: 推荐客户端 */}
       <section>
         <div className="mb-8 border-b-2 border-slate-900 pb-2 flex justify-between items-end">
-          <h2 className="text-2xl font-bold uppercase tracking-tight">核心推荐客户端</h2>
+          <h2 className="text-xl font-bold uppercase tracking-tight">核心推荐客户端</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {recommendedClients.map(post => (
@@ -100,7 +121,7 @@ export default function ToolsPage() {
       {/* Section 2: Clash 与 Mihomo 工具指南 */}
       <section className="bg-slate-50 p-8 md:p-12 border border-slate-200">
         <div className="mb-8 border-b border-slate-300 pb-4">
-          <h2 className="text-2xl font-bold uppercase tracking-tight text-slate-900">Clash 与 Mihomo 工具指南</h2>
+          <h2 className="text-xl font-bold uppercase tracking-tight text-slate-900">Clash 与 Mihomo 工具指南</h2>
           <p className="text-slate-600 mt-2">围绕最流行的规则分流客户端，从订阅导入到排错的基础教程。</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -156,9 +177,9 @@ export default function ToolsPage() {
       {/* Section 5: 测速与排错 */}
       <section>
         <div className="mb-8 border-b-2 border-slate-900 pb-2">
-          <h2 className="text-2xl font-bold uppercase tracking-tight">测速、诊断与排错工具</h2>
+          <h2 className="text-xl font-bold uppercase tracking-tight">测速、诊断与排错工具</h2>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {speedTools.map(post => (
             <Link key={post.slug} href={`/${post.category}/${post.slug}`} className="group flex flex-col h-full bg-slate-900 text-white p-6 hover:bg-slate-800 transition-colors">
               <span className="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-3">{catMap[post.category] || post.category}</span>
