@@ -1,6 +1,8 @@
 import { getAllBrands, getBrandBySlug } from '@/lib/brands';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
+import { getAllPosts } from '@/lib/mdx';
 import { Metadata } from 'next';
 
 interface Props {
@@ -32,6 +34,11 @@ export function generateMetadata({ params }: Props): Metadata {
 export default function BrandProfilePage({ params }: Props) {
   const brand = getBrandBySlug(params.slug);
   if (!brand) notFound();
+
+  // Get related posts
+  const relatedPosts = getAllPosts()
+    .filter(post => post.brands?.includes(brand.id))
+    .sort((a, b) => b.date.localeCompare(a.date));
 
   // "Who is this for?" generation logic based on tags
   let audience = "从公开资料看，该品牌提供基础的网络代理服务，适合进一步了解。";
@@ -184,10 +191,44 @@ export default function BrandProfilePage({ params }: Props) {
 
       {/* Related Articles Section */}
       <section className="pt-8 border-t border-slate-200">
-        <h2 className="text-xl font-bold text-slate-900 mb-4">品牌相关文章</h2>
-        <div className="bg-slate-50 rounded-xl p-8 text-center border border-slate-100">
-          <p className="text-slate-500">海外志暂时还没有这个品牌的专题文章。</p>
-        </div>
+        <h2 className="text-xl font-bold text-slate-900 mb-6">品牌相关文章</h2>
+        {relatedPosts.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {relatedPosts.map(post => (
+              <Link key={post.slug} href={`/${post.category}/${post.slug}`} className="group flex flex-col bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-slate-300 hover:shadow-md transition-all">
+                {post.coverImage && (
+                  <div className="relative h-48 w-full overflow-hidden bg-slate-100">
+                    <Image
+                      src={post.coverImage}
+                      alt={post.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                )}
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex items-center gap-3 text-xs text-slate-500 mb-3">
+                    <span className="font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">{post.category === 'airport-observation' ? '机场观察' : post.category}</span>
+                    <span>{post.date}</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-sm text-slate-500 leading-relaxed line-clamp-2 mb-4 flex-grow">
+                    {post.description}
+                  </p>
+                  <div className="text-sm font-semibold text-slate-900 flex items-center gap-1 group-hover:gap-2 transition-all mt-auto">
+                    阅读文章 <span className="text-blue-600">→</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="bg-slate-50 rounded-xl p-8 text-center border border-slate-100">
+            <p className="text-slate-500">海外志暂时还没有这个品牌的专题文章。</p>
+          </div>
+        )}
       </section>
 
     </div>
