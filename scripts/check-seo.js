@@ -125,7 +125,7 @@ htmlFiles.forEach(file => {
       let target = href.split('?')[0].split('#')[0];
       if (!allHtmlRoutes.has(target) && target !== '/') {
         metrics.brokenInternalLinks++;
-        // console.log(`Broken link: ${target} in ${file}`);
+        console.log(`Broken link: ${target} in ${file}`);
       }
       
       if (href.startsWith('/brands/')) {

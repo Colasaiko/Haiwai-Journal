@@ -82,6 +82,31 @@ export default function ArticlesPage() {
           </header>
         </div>
 
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+            <span className="w-1.5 h-6 bg-blue-500 rounded-full mr-3"></span>
+            常见问题与解决方法
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Link href="/network/airport-not-working-troubleshooting" className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all group">
+              <div className="text-base font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors leading-tight">机场连不上怎么办？</div>
+              <p className="text-sm text-slate-500 line-clamp-2">从订阅、节点、DNS 到客户端完整排查流程。</p>
+            </Link>
+            <Link href="/network/airport-slow-speed-troubleshooting" className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all group">
+              <div className="text-base font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors leading-tight">机场速度变慢怎么办？</div>
+              <p className="text-sm text-slate-500 line-clamp-2">网页、流媒体和下载变慢的真实排查方案。</p>
+            </Link>
+            <Link href="/network/why-airport-node-timeout" className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all group">
+              <div className="text-base font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors leading-tight">节点全部超时怎么办？</div>
+              <p className="text-sm text-slate-500 line-clamp-2">延迟测试全红、Timeout 的原因与应对。</p>
+            </Link>
+            <Link href="/clash/how-to-use-airport-subscription" className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all group">
+              <div className="text-base font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors leading-tight">订阅链接怎么用？</div>
+              <p className="text-sm text-slate-500 line-clamp-2">各大客户端导入节点通用教程。</p>
+            </Link>
+          </div>
+        </div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Suspense fallback={<div className="py-20 text-center text-slate-400">正在加载内容档案...</div>}>
             <ArticlesClient initialPosts={posts} categories={categories} />
