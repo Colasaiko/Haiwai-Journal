@@ -156,6 +156,19 @@ export default function BrandProfilePage({ params }: Props) {
               <p className="text-orange-600 text-sm mt-2">暂无优惠码资料</p>
             )}
           </section>
+
+          <section className="bg-blue-50 rounded-xl border border-blue-100 p-6 shadow-sm">
+            <h2 className="text-sm font-bold text-blue-800 mb-2">新手教程</h2>
+            <p className="text-blue-600 text-sm mb-3">
+              不知道怎么选套餐？节点配置失败？查看专属排障指南。
+            </p>
+            <Link 
+              href={`/airport-observation/${brand.slug}-how-to-use-guide`}
+              className="inline-block bg-white text-blue-700 text-sm font-semibold px-4 py-2 rounded-lg border border-blue-200 hover:bg-blue-600 hover:text-white transition-colors"
+            >
+              阅读使用与故障排查指南 &rarr;
+            </Link>
+          </section>
         </div>
 
       </div>
