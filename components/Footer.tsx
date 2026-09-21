@@ -43,9 +43,10 @@ export default function Footer() {
             <li><Link href="/sitemap.xml" className="hover:text-white transition-colors">Sitemap</Link></li>
             <li><Link href="/rss.xml" className="hover:text-white transition-colors">RSS 订阅</Link></li>
           </ul>
-          <div className="flex">
-            <input type="email" placeholder="输入邮箱订阅更新" className="bg-slate-800 border-none text-sm px-4 py-2 w-full text-white placeholder-slate-500 focus:ring-1 focus:ring-slate-500 outline-none" />
-            <button className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 text-sm transition-colors">订阅</button>
+          <p className="text-slate-400 text-sm mb-4">加入海外志通讯，获取最新测评与工具推荐（开发筹备中）。</p>
+          <div className="flex bg-slate-800 rounded-md overflow-hidden opacity-50 cursor-not-allowed">
+            <input type="email" placeholder="订阅功能筹备中" disabled className="bg-slate-800 border-none text-sm px-4 py-2 w-full text-white placeholder-slate-500 outline-none cursor-not-allowed" />
+            <button disabled className="bg-slate-700 text-slate-400 px-4 py-2 text-sm cursor-not-allowed">订阅</button>
           </div>
         </div>
       </div>

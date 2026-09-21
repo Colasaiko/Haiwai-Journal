@@ -3,6 +3,13 @@ import path from 'path';
 import { notFound } from 'next/navigation';
 import Redirector from './Redirector';
 
+export const metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  }
+};
+
 // Tell Next.js to pre-render all known IDs
 export function generateStaticParams() {
   const dataPath = path.join(process.cwd(), 'ordered_airports.json');

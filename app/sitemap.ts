@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllPosts, getAllCategories } from '@/lib/mdx';
+import { getAllBrands } from '@/lib/brands';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://haiwaijichang.online';
@@ -13,14 +14,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}/${cat.slug}`,
     lastModified: new Date(),
   }));
+  
+  const brands = getAllBrands().map((brand) => ({
+    url: `${baseUrl}/brands/${brand.slug}`,
+    lastModified: new Date(),
+  }));
 
   const routes = [
     '', '/articles', '/about', '/compare', '/privacy', '/terms',
-    '/brands', '/faq', '/search', '/start-here', '/methodology', '/disclosure'
+    '/brands', '/faq', '/start-here', '/methodology', '/disclosure'
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
   }));
 
-  return [...routes, ...categories, ...posts];
+  return [...routes, ...categories, ...brands, ...posts];
 }
