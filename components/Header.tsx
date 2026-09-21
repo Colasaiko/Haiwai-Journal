@@ -4,10 +4,13 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import SearchDialog from './SearchDialog';
+import BrowseDialog from './BrowseDialog';
+import { BookOpen } from 'lucide-react';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isBrowseOpen, setIsBrowseOpen] = useState(false);
   const [mobileSearchQuery, setMobileSearchQuery] = useState('');
   const router = useRouter();
 
@@ -58,9 +61,17 @@ export default function Header() {
         </nav>
 
         {/* Right Icons & Mobile Toggle */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-4">
           <p className="hidden xl:block text-xs text-slate-400 italic mr-4">探索更大的世界，<br/>从更好的网络开始。</p>
           
+          <button 
+            onClick={() => setIsBrowseOpen(true)}
+            className="hidden sm:flex items-center space-x-2 text-slate-500 hover:text-blue-600 focus:outline-none hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors"
+          >
+            <BookOpen className="w-4 h-4" />
+            <span className="text-xs font-medium">浏览</span>
+          </button>
+
           <button 
             onClick={() => setIsSearchOpen(true)}
             className="hidden sm:flex items-center space-x-2 text-slate-500 hover:text-slate-900 focus:outline-none bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-colors"
@@ -91,7 +102,14 @@ export default function Header() {
       {/* Mobile Nav Dropdown */}
       {isMenuOpen && (
         <div className="lg:hidden absolute top-16 left-0 w-full bg-white shadow-xl border-b border-slate-200">
-          <nav className="px-4 pt-2 pb-6 flex flex-col space-y-2 max-h-[80vh] overflow-y-auto">
+          <nav className="px-4 pt-4 pb-6 flex flex-col space-y-2 max-h-[80vh] overflow-y-auto">
+            <button 
+              onClick={() => { setIsBrowseOpen(true); setIsMenuOpen(false); }}
+              className="flex items-center justify-center w-full bg-blue-50 text-blue-700 py-3 rounded-xl text-base font-bold mb-4 shadow-sm"
+            >
+              <BookOpen className="w-5 h-5 mr-2" />
+              浏览全部内容
+            </button>
             {navLinks.map((link) => (
               <Link 
                 key={link.name} 
@@ -133,6 +151,7 @@ export default function Header() {
       )}
 
       <SearchDialog isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <BrowseDialog isOpen={isBrowseOpen} onClose={() => setIsBrowseOpen(false)} />
     </header>
   );
 }
