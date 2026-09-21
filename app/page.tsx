@@ -1,6 +1,12 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/mdx';
+
+export const metadata: Metadata = {
+  title: '2026 机场推荐｜稳定、便宜、专线机场测评 - 海外志',
+  description: '海外志整理 2026 机场推荐、稳定机场、便宜机场、IPLC / IEPL 专线机场、Clash 订阅、流媒体与 AI 使用场景，并提供品牌档案、套餐资料与机场对比。',
+};
 
 export default function Home() {
   const posts = getAllPosts();
@@ -11,9 +17,32 @@ export default function Home() {
 
   const catMap: Record<string, string> = { "airport-observation": "机场测评", "network": "网络知识", "clash": "Clash 教程", "tools": "软件工具", "guides": "海外指南" };
 
+  const recommendationSlugs = [
+    { slug: 'peak-hours-stable-airport-recommendations', label: '晚高峰稳定机场推荐', desc: '测试各种拥堵情况下的实际表现' },
+    { slug: 'student-budget-airport-recommendations', label: '便宜机场推荐', desc: '低预算机场怎么选与性价比分析' },
+    { slug: 'dedicated-line-iplc-iepl-explained', label: '专线机场推荐', desc: '了解 IPLC / IEPL 专线与跨境传输' },
+    { slug: 'clash-airport-recommendations-2026', label: 'Clash 机场推荐', desc: '适配最主流客户端的订阅服务' },
+    { slug: 'pay-as-you-go-unlimited-airport-recommendations', label: '按量计费机场', desc: '轻度用户按量套餐与不限时机场选择' },
+    { slug: 'streaming-chatgpt-airport-recommendations', label: '流媒体与 ChatGPT 机场推荐', desc: '解锁 Netflix 与 AI 服务的原生节点' },
+    { slug: 'established-old-airport-recommendations', label: '老牌机场推荐', desc: '老牌机场选择思路与稳定运营背景' },
+    { slug: 'github-reddit-airport-recommendations', label: '真实评价收集', desc: 'GitHub 与 Reddit 用户讨论区' }
+  ];
+  
+  const recommendationLinks = recommendationSlugs.map(item => {
+    const post = posts.find(p => p.slug === item.slug);
+    return post ? { ...item, category: post.category } : null;
+  }).filter(Boolean);
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
-      <h1 className="text-3xl font-bold text-slate-900 px-4 md:px-0 mt-4 mb-2">海外志｜海外网络、机场测评与数字工具指南</h1>
+      
+      <div className="px-4 md:px-0 mt-4 mb-8">
+        <span className="text-blue-600 font-bold text-sm tracking-wider uppercase mb-2 block">海外志 / HAIWAI JOURNAL</span>
+        <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">2026 机场推荐与机场测评</h1>
+        <p className="text-slate-600 max-w-4xl leading-relaxed">
+          海外志持续整理 2026 机场推荐、机场测评与网络使用资料，内容覆盖稳定机场、便宜机场、IPLC / IEPL 专线机场、Clash 订阅、流媒体、ChatGPT 与不同使用场景。除了品牌资料和套餐价格，我们也会整理线路知识、客户端教程与购买前需要注意的问题。如果你正在搜索“机场推荐 2026”，可以先从使用场景而不是品牌数量开始筛选。
+        </p>
+      </div>
       
       {/* Hero */}
       <section className="relative h-[60vh] min-h-[500px] w-full bg-slate-900 overflow-hidden flex items-end">
@@ -33,6 +62,29 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 2026 Recommendation Hub */}
+      <section className="bg-slate-50 border border-slate-200 p-8 md:p-12">
+        <div className="mb-8 border-b-2 border-slate-900 pb-4">
+          <h2 className="text-2xl font-bold uppercase tracking-tight text-slate-900">2026 机场推荐：按需求开始选择</h2>
+          <p className="text-slate-600 mt-2 max-w-2xl">
+            网上常见的“机场排行榜”与“机场天梯榜”通常会把不同价位、线路和使用场景混在一起比较。海外志更倾向提供分类指南，让用户按真实需求寻找。
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {recommendationLinks.map(item => (
+            <Link key={item!.slug} href={`/${item!.category}/${item!.slug}`} className="block bg-white border border-slate-200 p-5 hover:border-blue-500 hover:shadow-md transition-all group">
+              <h3 className="font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">{item!.label}</h3>
+              <p className="text-xs text-slate-500 line-clamp-2">{item!.desc}</p>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-8 flex gap-4 text-sm items-center">
+          <span className="text-slate-600 font-medium">机场排行榜与天梯榜怎么看？</span>
+          <Link href="/brands" className="font-semibold text-blue-600 hover:underline">浏览品牌库 &rarr;</Link>
+          <Link href="/compare" className="font-semibold text-blue-600 hover:underline">品牌对比工具 &rarr;</Link>
+        </div>
+      </section>
+
       {/* Featured Cards */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {featuredPosts.map(post => (
@@ -47,25 +99,6 @@ export default function Home() {
             </div>
           </Link>
         ))}
-      </section>
-
-      {/* Feature Area */}
-      <section className="bg-slate-900 text-white overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="relative h-64 lg:h-auto min-h-[400px]">
-             <Image src="/images/hero-1.jpg" alt="Airport Feature" fill className="object-cover opacity-80" />
-          </div>
-          <div className="p-12 lg:p-16 flex flex-col justify-center relative">
-            <div className="absolute top-12 right-12 text-6xl text-white/10 font-serif hidden md:block">&quot;</div>
-            <span className="text-blue-400 text-sm tracking-wider uppercase font-semibold mb-4">专题报道</span>
-            <h2 className="text-3xl font-bold mb-6">新手如何选择适合自己的机场服务？</h2>
-            <p className="text-slate-300 mb-8 leading-relaxed">面对众多机场品牌，新手常常不知道该如何选择。本文从使用器具、线路类别、稳定性、价格区间等方面，帮助理解判断逻辑，找到更适合自己的服务。</p>
-            <div>
-              <Link href="/start-here" className="inline-block border border-white/30 text-white px-8 py-3 text-sm uppercase tracking-wide hover:bg-white hover:text-slate-900 transition-colors">查看专题</Link>
-            </div>
-            <p className="mt-12 text-slate-400 font-serif italic border-l-2 border-blue-500 pl-4">“更好的网络，是通往世界的另一种方式。”</p>
-          </div>
-        </div>
       </section>
 
       {/* Latest & Weekly */}
