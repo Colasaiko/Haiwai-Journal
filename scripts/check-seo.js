@@ -55,6 +55,9 @@ const metrics = {
 const titles = {};
 const descriptions = {};
 
+const validBrandSlugs = new Set(["weifeng", "feimao", "wuyou", "lingmao", "firefly", "kuajie", "shanyue", "kuaili", "xingdaomeng", "yinxingren", "baoyun", "jiuyun", "bianyuan", "weitu", "bitznet", "yifanyun", "tiziyun", "sujie", "jilian", "feiv", "u1s1", "wavenet", "guangnian", "kexin", "sogo", "lingdong", "muguang", "ermao", "phantom", "nanocloud", "guangsu"]);
+const validBrandIds = new Set(["brand-1", "brand-2", "brand-3", "brand-4", "brand-5", "brand-6", "brand-7", "brand-8", "brand-9", "brand-10", "brand-11", "brand-12", "brand-13", "brand-14", "brand-15", "brand-16", "brand-17", "brand-18", "brand-19", "brand-20", "brand-21", "brand-22", "brand-23", "brand-24", "brand-25", "brand-26", "brand-27", "brand-28", "brand-29", "brand-30", "brand-31"]);
+
 htmlFiles.forEach(file => {
   const content = fs.readFileSync(file, 'utf8');
 
@@ -124,23 +127,51 @@ htmlFiles.forEach(file => {
         metrics.brokenInternalLinks++;
         // console.log(`Broken link: ${target} in ${file}`);
       }
+      
+      if (href.startsWith('/brands/')) {
+        const slug = target.replace('/brands/', '');
+        if (slug && !validBrandSlugs.has(slug)) {
+          metrics.brandArticleLinkErrors++;
+        }
+      }
+      if (href.startsWith('/compare?brands=')) {
+        const idsStr = href.replace('/compare?brands=', '').split('#')[0];
+        const ids = idsStr.split(',');
+        ids.forEach(id => {
+          if (!validBrandIds.has(id)) {
+            metrics.compareLinkErrors++;
+          }
+        });
+      }
     }
   });
 
   if (content.includes('/brands/undefined')) metrics.brandsUndefined++;
   
   // Images
-  const imgRegex = /<img[^>]*src="(\/[^"]+)"[^>]*>/g;
+  const imgRegex = /<img[^>]*>/g;
   let m;
   while ((m = imgRegex.exec(content)) !== null) {
-    let src = m[1].split('?')[0]; // remove query strings
-    if (src.startsWith('/_next/')) continue; // next.js internal
-    const localPath = path.join(process.cwd(), 'out', src);
-    if (!fs.existsSync(localPath)) {
-      metrics.missingLocalImage++;
-    } else {
-      if (fs.statSync(localPath).size === 0) {
-        metrics.emptyImageFiles++;
+    const imgTag = m[0];
+    const srcMatch = imgTag.match(/src="([^"]+)"/);
+    if (srcMatch) {
+      let src = srcMatch[1].split('?')[0]; 
+      if (!src.startsWith('/_next/') && src.startsWith('/')) { 
+        const localPath = path.join(process.cwd(), 'out', src);
+        if (!fs.existsSync(localPath)) {
+          metrics.missingLocalImage++;
+        } else {
+          if (fs.statSync(localPath).size === 0) {
+            metrics.emptyImageFiles++;
+          }
+        }
+      }
+    }
+    
+    // Check alt
+    if (!imgTag.includes('alt=') || imgTag.includes('alt=""')) {
+      if (!imgTag.includes('aria-hidden="true"') && !imgTag.includes('role="presentation"')) {
+        metrics.missingAltMainImage++;
       }
     }
   }
