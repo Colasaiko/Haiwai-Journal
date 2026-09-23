@@ -77,6 +77,13 @@ export default function ArticlePage({ params }: { params: { category: string, sl
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
+      url: `https://haiwaijichang.online/${params.category}/${params.slug}`,
+      inLanguage: 'zh-CN',
+      publisher: {
+        '@type': 'Organization',
+        name: '海外志',
+        url: 'https://haiwaijichang.online/'
+      },
     description: post.description,
     datePublished: post.date,
     author: {

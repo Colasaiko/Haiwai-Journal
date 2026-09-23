@@ -1,0 +1,102 @@
+[
+  {
+    "brandId": "brand-1",
+    "brandName": "微风网络",
+    "slug": "weifeng-subscription-guide",
+    "type": "subscription",
+    "features": "全IPLC专线，享受低延迟高速率 | 不限制设备同时接入 | 不限速",
+    "title": "微风网络订阅链接怎么用？Clash、Shadowrocket 与 v2rayN 导入指南",
+    "promptText": "Type: Subscription. Write about how to find, import, and update the subscription link for 微风网络. Cover Clash Verge, Shadowrocket, and v2rayN. Mention what to do if node is empty. Do NOT put real token.",
+    "coverImage": "/images/tools-1.jpg"
+  },
+  {
+    "brandId": "brand-1",
+    "brandName": "微风网络",
+    "slug": "weifeng-plans-pricing-guide",
+    "type": "plans-pricing",
+    "features": "全IPLC专线，享受低延迟高速率 | 不限制设备同时接入 | 不限速",
+    "title": "微风网络套餐怎么选？价格、流量与付款周期选择指南",
+    "promptText": "Type: Plans. Write about pricing, data limits, and how to choose the right plan for 微风网络. Based on features: 全IPLC专线，享受低延迟高速率 | 不限制设备同时接入 | 不限速. Discuss light users, heavy users, streaming, etc.",
+    "coverImage": "/images/network-1.jpg"
+  },
+  {
+    "brandId": "brand-1",
+    "brandName": "微风网络",
+    "slug": "weifeng-troubleshooting-guide",
+    "type": "troubleshooting",
+    "features": "全IPLC专线，享受低延迟高速率 | 不限制设备同时接入 | 不限速",
+    "title": "微风网络连不上怎么办？节点超时、速度慢与订阅失败完整排查",
+    "promptText": "Type: Troubleshooting. Write a step-by-step troubleshooting guide for 微风网络. Cover single node vs all nodes, timeout, DNS, TUN, and subscription update.",
+    "coverImage": "/images/network-2.jpg"
+  },
+  {
+    "brandId": "brand-1",
+    "brandName": "微风网络",
+    "slug": "weifeng-nodes-routes-guide",
+    "type": "nodes-routes",
+    "features": "全IPLC专线，享受低延迟高速率 | 不限制设备同时接入 | 不限速",
+    "title": "微风网络节点怎么选？线路、地区与延迟选择指南",
+    "promptText": "Type: Nodes/Routes. Write about the nodes and routes for 微风网络. Based on features: 全IPLC专线，享受低延迟高速率 | 不限制设备同时接入 | 不限速. Discuss IPLC/IEPL if applicable, and region selection for streaming/gaming.",
+    "coverImage": "/images/clash-1.jpg"
+  },
+  {
+    "brandId": "brand-1",
+    "brandName": "微风网络",
+    "slug": "weifeng-website-account-guide",
+    "type": "website-account",
+    "features": "全IPLC专线，享受低延迟高速率 | 不限制设备同时接入 | 不限速",
+    "title": "微风网络官网入口怎么找？注册、购买、登录与续费指南",
+    "promptText": "Type: Website/Account. Write a guide on how to register, buy, login, and renew for 微风网络. Mention avoiding fake websites. State clearly that we are a 3rd party site, NOT the official brand site.",
+    "coverImage": "/images/about-1.jpg"
+  },
+  {
+    "brandId": "brand-2",
+    "brandName": "飞猫云",
+    "slug": "feimao-subscription-guide",
+    "type": "subscription",
+    "features": "季付及以上用户，购买日起每 30 天自动刷新流量 | 全 IPLC 专线网络，提供最高 2.5Gbps 稳定速率 | 原生 IP 线路，轻松解锁 Netflix、Disney+、ChatGPT、TikTok 等服务 | 不限制设备连接数量，多端同时登录使用 | 智能流量分配与路由优化，让访问更顺畅更智能 | 年付 8 折｜两年付 7 折｜三年付 6 折 优惠长期有效 | 全球节点覆盖： | 香港 x20、台湾 x10、日本 x10、新加坡 x10、美国 x10、韩国 x3、马来西亚、越南、菲律宾、泰国、印度、英国、法国、德国、阿根廷等",
+    "title": "飞猫云订阅链接怎么用？Clash、Shadowrocket 与 v2rayN 导入指南",
+    "promptText": "Type: Subscription. Write about how to find, import, and update the subscription link for 飞猫云. Cover Clash Verge, Shadowrocket, and v2rayN. Mention what to do if node is empty. Do NOT put real token.",
+    "coverImage": "/images/tools-1.jpg"
+  },
+  {
+    "brandId": "brand-2",
+    "brandName": "飞猫云",
+    "slug": "feimao-plans-pricing-guide",
+    "type": "plans-pricing",
+    "features": "季付及以上用户，购买日起每 30 天自动刷新流量 | 全 IPLC 专线网络，提供最高 2.5Gbps 稳定速率 | 原生 IP 线路，轻松解锁 Netflix、Disney+、ChatGPT、TikTok 等服务 | 不限制设备连接数量，多端同时登录使用 | 智能流量分配与路由优化，让访问更顺畅更智能 | 年付 8 折｜两年付 7 折｜三年付 6 折 优惠长期有效 | 全球节点覆盖： | 香港 x20、台湾 x10、日本 x10、新加坡 x10、美国 x10、韩国 x3、马来西亚、越南、菲律宾、泰国、印度、英国、法国、德国、阿根廷等",
+    "title": "飞猫云套餐怎么选？价格、流量与付款周期选择指南",
+    "promptText": "Type: Plans. Write about pricing, data limits, and how to choose the right plan for 飞猫云. Based on features: 季付及以上用户，购买日起每 30 天自动刷新流量 | 全 IPLC 专线网络，提供最高 2.5Gbps 稳定速率 | 原生 IP 线路，轻松解锁 Netflix、Disney+、ChatGPT、TikTok 等服务 | 不限制设备连接数量，多端同时登录使用 | 智能流量分配与路由优化，让访问更顺畅更智能 | 年付 8 折｜两年付 7 折｜三年付 6 折 优惠长期有效 | 全球节点覆盖： | 香港 x20、台湾 x10、日本 x10、新加坡 x10、美国 x10、韩国 x3、马来西亚、越南、菲律宾、泰国、印度、英国、法国、德国、阿根廷等. Discuss light users, heavy users, streaming, etc.",
+    "coverImage": "/images/network-1.jpg"
+  },
+  {
+    "brandId": "brand-2",
+    "brandName": "飞猫云",
+    "slug": "feimao-troubleshooting-guide",
+    "type": "troubleshooting",
+    "features": "季付及以上用户，购买日起每 30 天自动刷新流量 | 全 IPLC 专线网络，提供最高 2.5Gbps 稳定速率 | 原生 IP 线路，轻松解锁 Netflix、Disney+、ChatGPT、TikTok 等服务 | 不限制设备连接数量，多端同时登录使用 | 智能流量分配与路由优化，让访问更顺畅更智能 | 年付 8 折｜两年付 7 折｜三年付 6 折 优惠长期有效 | 全球节点覆盖： | 香港 x20、台湾 x10、日本 x10、新加坡 x10、美国 x10、韩国 x3、马来西亚、越南、菲律宾、泰国、印度、英国、法国、德国、阿根廷等",
+    "title": "飞猫云连不上怎么办？节点超时、速度慢与订阅失败完整排查",
+    "promptText": "Type: Troubleshooting. Write a step-by-step troubleshooting guide for 飞猫云. Cover single node vs all nodes, timeout, DNS, TUN, and subscription update.",
+    "coverImage": "/images/network-2.jpg"
+  },
+  {
+    "brandId": "brand-2",
+    "brandName": "飞猫云",
+    "slug": "feimao-nodes-routes-guide",
+    "type": "nodes-routes",
+    "features": "季付及以上用户，购买日起每 30 天自动刷新流量 | 全 IPLC 专线网络，提供最高 2.5Gbps 稳定速率 | 原生 IP 线路，轻松解锁 Netflix、Disney+、ChatGPT、TikTok 等服务 | 不限制设备连接数量，多端同时登录使用 | 智能流量分配与路由优化，让访问更顺畅更智能 | 年付 8 折｜两年付 7 折｜三年付 6 折 优惠长期有效 | 全球节点覆盖： | 香港 x20、台湾 x10、日本 x10、新加坡 x10、美国 x10、韩国 x3、马来西亚、越南、菲律宾、泰国、印度、英国、法国、德国、阿根廷等",
+    "title": "飞猫云节点怎么选？线路、地区与延迟选择指南",
+    "promptText": "Type: Nodes/Routes. Write about the nodes and routes for 飞猫云. Based on features: 季付及以上用户，购买日起每 30 天自动刷新流量 | 全 IPLC 专线网络，提供最高 2.5Gbps 稳定速率 | 原生 IP 线路，轻松解锁 Netflix、Disney+、ChatGPT、TikTok 等服务 | 不限制设备连接数量，多端同时登录使用 | 智能流量分配与路由优化，让访问更顺畅更智能 | 年付 8 折｜两年付 7 折｜三年付 6 折 优惠长期有效 | 全球节点覆盖： | 香港 x20、台湾 x10、日本 x10、新加坡 x10、美国 x10、韩国 x3、马来西亚、越南、菲律宾、泰国、印度、英国、法国、德国、阿根廷等. Discuss IPLC/IEPL if applicable, and region selection for streaming/gaming.",
+    "coverImage": "/images/clash-1.jpg"
+  },
+  {
+    "brandId": "brand-2",
+    "brandName": "飞猫云",
+    "slug": "feimao-website-account-guide",
+    "type": "website-account",
+    "features": "季付及以上用户，购买日起每 30 天自动刷新流量 | 全 IPLC 专线网络，提供最高 2.5Gbps 稳定速率 | 原生 IP 线路，轻松解锁 Netflix、Disney+、ChatGPT、TikTok 等服务 | 不限制设备连接数量，多端同时登录使用 | 智能流量分配与路由优化，让访问更顺畅更智能 | 年付 8 折｜两年付 7 折｜三年付 6 折 优惠长期有效 | 全球节点覆盖： | 香港 x20、台湾 x10、日本 x10、新加坡 x10、美国 x10、韩国 x3、马来西亚、越南、菲律宾、泰国、印度、英国、法国、德国、阿根廷等",
+    "title": "飞猫云官网入口怎么找？注册、购买、登录与续费指南",
+    "promptText": "Type: Website/Account. Write a guide on how to register, buy, login, and renew for 飞猫云. Mention avoiding fake websites. State clearly that we are a 3rd party site, NOT the official brand site.",
+    "coverImage": "/images/about-1.jpg"
+  }
+]

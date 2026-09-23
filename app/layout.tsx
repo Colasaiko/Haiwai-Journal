@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "海外志｜海外机场、网络知识与 Clash 使用指南",
   description: "海外志是一个围绕海外机场、网络知识、Clash 教程、软件工具与海外数字生活展开的中文内容 Blog，提供实用教程、概念解释、选择建议与使用经验。",
   openGraph: {
+    title: "海外志｜海外机场、网络知识与 Clash 使用指南",
+    description: "海外志是一个围绕海外机场、网络知识、Clash 教程、软件工具与海外数字生活展开的中文内容 Blog，提供实用教程、概念解释、选择建议与使用经验。",
+    url: "https://haiwaijichang.online",
     siteName: '海外志',
     locale: 'zh_CN',
     type: 'website',
@@ -21,6 +24,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
+    title: "海外志｜海外机场、网络知识与 Clash 使用指南",
+    description: "海外志是一个围绕海外机场、网络知识、Clash 教程、软件工具与海外数字生活展开的中文内容 Blog，提供实用教程、概念解释、选择建议与使用经验。",
+    images: ['/images/anime_desk.jpg'],
   },
   alternates: {
     canonical: 'https://haiwaijichang.online',

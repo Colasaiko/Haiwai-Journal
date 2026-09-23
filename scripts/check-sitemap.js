@@ -35,6 +35,8 @@ const htmlFiles = getFiles('out', '.html');
 let missingFromSitemap = 0;
 let noindexInSitemap = 0;
 let invalidSitemapUrl = 0;
+let missingRequiredNoindex = 0;
+let accidentalNoindex = 0;
 
 htmlFiles.forEach(f => {
   const content = fs.readFileSync(f, 'utf8');
@@ -45,22 +47,30 @@ htmlFiles.forEach(f => {
   const fullUrl = ('https://haiwaijichang.online' + p).replace(/\/$/, '');
   
   const isNoindex = content.includes('content="noindex') || content.includes('name="robots" content="noindex');
-  // Specific routes that should be noindex
-  if (p.startsWith('/search') || p.startsWith('/site-check') || p.startsWith('/go/')) {
+  
+  const isRequiredNoindexRoute = p.startsWith('/search') || p.startsWith('/site-check') || p.startsWith('/go/');
+  const is404 = p === '/404';
+
+  if (isRequiredNoindexRoute) {
     if (!isNoindex) {
-      console.error(`Missing noindex on: ${p}`);
-      // fail
+      missingRequiredNoindex++;
+      console.error(`HARD FAIL: Missing noindex on required route: ${p}`);
+    }
+  } else if (!is404) {
+    // Normal route
+    if (isNoindex) {
+      accidentalNoindex++;
+      console.error(`HARD FAIL: Accidental noindex on indexable route: ${p}`);
     }
   }
 
   if (isNoindex) {
-    if (urlSet.has(fullUrl)) {
+    if (urlSet.has(fullUrl) || urlSet.has(fullUrl + '/')) {
       noindexInSitemap++;
       console.error(`Noindex URL in sitemap: ${fullUrl}`);
     }
   } else {
-    // Should be in sitemap unless it's a 404 page
-    if (p !== '/404' && !urlSet.has(fullUrl)) {
+    if (!is404 && !urlSet.has(fullUrl) && !urlSet.has(fullUrl + '/')) {
       missingFromSitemap++;
       console.error(`Indexable URL missing from sitemap: ${fullUrl}`);
     }
@@ -73,7 +83,6 @@ urlsInSitemap.forEach(u => {
   let expectedFile = path.join('out', p + '.html');
   if (p === '' || p === '/') expectedFile = path.join('out', 'index.html');
   
-  // Try index.html inside dir
   let expectedIndexFile = path.join('out', p, 'index.html');
   
   if (!fs.existsSync(expectedFile) && !fs.existsSync(expectedIndexFile)) {
@@ -86,11 +95,13 @@ console.log({
   duplicateSitemapUrl,
   missingFromSitemap,
   noindexInSitemap,
-  invalidSitemapUrl
+  invalidSitemapUrl,
+  missingRequiredNoindex,
+  accidentalNoindex
 });
 
-if (duplicateSitemapUrl > 0 || missingFromSitemap > 0 || noindexInSitemap > 0 || invalidSitemapUrl > 0) {
-  process.exit(1);
+if (duplicateSitemapUrl > 0 || missingFromSitemap > 0 || noindexInSitemap > 0 || invalidSitemapUrl > 0 || missingRequiredNoindex > 0 || accidentalNoindex > 0) {
+  process.exitCode = 1;
 } else {
   console.log("Sitemap checks passed!");
 }

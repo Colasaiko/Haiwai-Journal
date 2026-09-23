@@ -6,9 +6,20 @@ const KEY = process.env.INDEXNOW_KEY;
 const HOST = 'haiwaijichang.online';
 const ENDPOINT = 'api.indexnow.org';
 
+const isSubmit = process.argv.includes('--submit');
+
 if (!KEY) {
   console.log('SKIPPED: INDEXNOW_KEY not configured');
   process.exit(0);
+}
+
+// verify key file exists in out/ or public/
+const keyPathOut = path.join('out', `${KEY}.txt`);
+const keyPathPublic = path.join('public', `${KEY}.txt`);
+
+if (!fs.existsSync(keyPathOut) && !fs.existsSync(keyPathPublic)) {
+  console.log('ERROR: IndexNow key file not found');
+  process.exit(0); // Safely exit without submitting
 }
 
 const sitemapPath = path.join('out', 'sitemap.xml');
@@ -34,9 +45,12 @@ const payload = JSON.stringify({
 
 console.log(`Prepared IndexNow payload with ${urls.length} URLs`);
 
-// Do not submit during build
-// Uncomment below to actually submit
-/*
+if (!isSubmit) {
+  console.log('DRY RUN READY');
+  console.log('SUBMISSION CODE READY');
+  process.exit(0);
+}
+
 const options = {
   hostname: ENDPOINT,
   path: '/IndexNow',
@@ -58,4 +72,3 @@ req.on('error', (e) => {
 
 req.write(payload);
 req.end();
-*/

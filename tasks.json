@@ -1,0 +1,254 @@
+[
+  {
+    "slug": "phone-works-but-computer-cannot-connect",
+    "title": "为什么手机能用机场，电脑却连不上？Windows 与 macOS 排查指南",
+    "category": "network",
+    "spec": "Core: 同一个订阅在手机正常、电脑异常时如何判断。Cover: 订阅是否一致, 客户端版本, System Proxy, TUN, Windows 防火墙, 杀毒软件, DNS, 系统时间, 网络适配器, 代理残留, 管理员权限, macOS 网络设置. 必须做判断流程，不要只是罗列原因。",
+    "coverImage": "/images/network-1.jpg"
+  },
+  {
+    "slug": "wifi-works-but-mobile-data-cannot-connect",
+    "title": "为什么 Wi-Fi 能用机场，手机流量却不能？4G / 5G 网络排查指南",
+    "category": "network",
+    "spec": "Core: Wi-Fi 和移动数据为什么可能结果不同。Cover: 运营商, IPv4 / IPv6, DNS, APN, 网络切换, 移动数据权限, 系统 VPN 权限, 客户端后台权限, 节点线路. 不要断言一定是运营商封锁。",
+    "coverImage": "/images/network-2.jpg"
+  },
+  {
+    "slug": "browser-works-but-app-cannot-connect",
+    "title": "为什么浏览器能翻墙，App 却打不开？系统代理、TUN 与分流排查",
+    "category": "network",
+    "spec": "Core: 浏览器能翻墙 App 不能. Cover: HTTP/HTTPS Proxy, System Proxy, TUN, 应用是否遵循系统代理, UDP, DNS, 规则分流. 场景: Discord, Telegram, Steam, AI App, 命令行工具. 不要绑定单一客户端。",
+    "coverImage": "/images/network-3.jpg"
+  },
+  {
+    "slug": "google-works-but-chatgpt-does-not",
+    "title": "为什么 Google 能打开，ChatGPT 却打不开？IP、地区与网络问题怎么判断",
+    "category": "network",
+    "spec": "Core: Google能打开，ChatGPT打不开 (与地区账号规则文章区分，这篇是排查网络). Cover: IP质量, 地区, DNS, 浏览器Cookie, 账号, Cloudflare/风控页面, 节点切换, 不同设备, 网页与App, 服务本身故障. 不得保证换IP一定解决。",
+    "coverImage": "/images/network-4.jpg"
+  },
+  {
+    "slug": "speedtest-fast-but-download-slow",
+    "title": "为什么机场测速很快，实际下载却很慢？带宽、单线程与线路差异解析",
+    "category": "network",
+    "spec": "Core: Speedtest不能代表所有应用. Cover: 多线程, 单线程, 测速服务器, 目标服务器, CDN, 国际线路, TCP, 拥塞, 下载源限速, 本地硬盘, Wi-Fi, 高峰期. 不要和旧文章(怎么测速)重复逻辑，这篇写为什么测速和实际不一致。",
+    "coverImage": "/images/clash-1.jpg"
+  },
+  {
+    "slug": "airport-node-keeps-disconnecting",
+    "title": "为什么机场节点一直断线？频繁重连、掉线与断流怎么排查",
+    "category": "network",
+    "spec": "Core: 一直断线、频繁重连、掉线、断流排查. 区分: 完全断线, 几秒恢复, 固定时间断, 某节点断, 所有节点断. Cover: Wi-Fi, 路由器, 移动网络, 节点, 服务端, 客户端, TUN, 省电策略, 后台限制, 系统休眠, 连接数.",
+    "coverImage": "/images/clash-2.jpg"
+  },
+  {
+    "slug": "only-some-country-nodes-work",
+    "title": "为什么机场只有部分国家节点能用？香港正常、美国日本超时怎么排查",
+    "category": "network",
+    "spec": "Core: 只有部分国家能用(如香港正常，美日超时). 解释: 不同机房, 入口, 协议, 出口, 路由. 排查: 换网络, 换客户端, 测试多个地区, 检查订阅更新, 判断单节点还是区域问题。",
+    "coverImage": "/images/clash-3.jpg"
+  },
+  {
+    "slug": "same-airport-different-network-speed",
+    "title": "为什么同一个机场在不同宽带速度差很多？电信、联通、移动线路差异解析",
+    "category": "network",
+    "spec": "Core: 别人快我慢, 不同宽带速度不同. 解释: Last Mile, 运营商, 国内入口, BGP, 跨网, 国际出口, 地理位置, 晚高峰. 禁止声称某运营商永远最快。",
+    "coverImage": "/images/clash-4.jpg"
+  },
+  {
+    "slug": "how-many-devices-can-use-one-airport-account",
+    "title": "一个机场账号可以几台设备一起用？设备数、连接数与共享限制怎么理解",
+    "category": "network",
+    "spec": "Core: 设备数限制解释. 区分: 设备数量, IP数量, 同时连接数, 并发连接数, 家庭共享, 账号共享. 必须以具体品牌规则为准，不要编造限制。",
+    "coverImage": "/images/tools-1.jpg"
+  },
+  {
+    "slug": "primary-and-backup-airport-strategy",
+    "title": "主力机场和备用机场怎么搭配？双机场使用与故障切换思路",
+    "category": "network",
+    "spec": "Core: 备用线路的意义和故障切换. 场景: 办公, 流媒体, AI, 旅行, 特殊时期. 重点: 不需要推荐具体品牌。讲策略: 主力稳定, 备用便宜, 不同上游, 不同节点结构, 不同付款周期。",
+    "coverImage": "/images/tools-2.jpg"
+  },
+  {
+    "slug": "dns-pollution-proxy-troubleshooting",
+    "title": "DNS 污染怎么判断？代理已连接但网页打不开的 DNS 排查指南",
+    "category": "network",
+    "spec": "Core: DNS污染排查. 解释: DNS是什么, 污染是什么, 解析失败, DNS泄漏, Fake-IP, DoH/DoT基础. 不要说某一个DNS永远最好。强调不同客户端实现不同。",
+    "coverImage": "/images/guides-1.jpg"
+  },
+  {
+    "slug": "ipv6-proxy-connection-problems",
+    "title": "IPv6 为什么会影响机场连接？有网却打不开网页时怎么判断",
+    "category": "network",
+    "spec": "Core: IPv6影响连接排查. 解释: IPv4, IPv6, AAAA, 双栈, DNS, 客户端支持, 路由, 系统优先级. 给出如何判断是否与IPv6有关，而不是简单让所有人关闭IPv6。",
+    "coverImage": "/images/nav-network-v2.jpg"
+  },
+  {
+    "slug": "clash-verge-auto-select-fastest-node",
+    "title": "Clash Verge 怎么自动选择最快节点？URL-Test、Fallback 与策略组设置指南",
+    "category": "clash",
+    "spec": "Core: 自动选节点. 重点: Select, URL-Test, Fallback, Load Balance基础概念, 测试间隔, 延迟不等于速度, 自动切换风险。",
+    "coverImage": "/images/nav-clash-v2.jpg"
+  },
+  {
+    "slug": "clash-rule-mode-site-not-proxied",
+    "title": "Clash 规则模式为什么有的网站不走代理？Rule 匹配与分流排查",
+    "category": "clash",
+    "spec": "Core: 规则模式下某网站不走代理. 解释: Rule Order, Domain, Domain-Suffix, GeoIP, MATCH, DIRECT, Proxy Group, Rule Provider. 不要直接复制已有的clash-modes-explained文章内容。",
+    "coverImage": "/images/nav-tools-v2.jpg"
+  },
+  {
+    "slug": "clash-global-mode-still-not-working",
+    "title": "Clash 开了全局模式为什么还是打不开网页？Global 模式故障排查",
+    "category": "clash",
+    "spec": "Core: Global模式开了依然打不开网页. 重点: Global只是路由策略，不代表节点本身一定可用。检查: 当前节点, System Proxy, TUN, DNS, 浏览器, 防火墙, 订阅, 系统代理。",
+    "coverImage": "/images/nav-guides-v2.jpg"
+  },
+  {
+    "slug": "clash-system-proxy-on-but-browser-not-working",
+    "title": "Clash 系统代理打开了为什么浏览器没反应？Windows / macOS 排查",
+    "category": "clash",
+    "spec": "Core: 系统代理打开浏览器没反应. 区分: System Proxy vs TUN. 覆盖: Chrome, Edge, Firefox, 系统代理, 浏览器自定义代理, 扩展, PAC, VPN冲突。",
+    "coverImage": "/images/anime_desk.jpg"
+  },
+  {
+    "slug": "clash-tun-cannot-access-lan",
+    "title": "Clash 开 TUN 后访问不了局域网怎么办？NAS、打印机与路由规则排查",
+    "category": "clash",
+    "spec": "Core: TUN模式下访问不了局域网. 解释: LAN, RFC1918, Direct, Route, Bypass, Private Network. 不要给危险的一键全放行方案。",
+    "coverImage": "/images/anime_sky.jpg"
+  },
+  {
+    "slug": "clash-duplicate-nodes-and-profiles",
+    "title": "Clash 节点重复、配置重复怎么办？订阅与 Profile 清理方法",
+    "category": "clash",
+    "spec": "Core: 节点和配置重复. 覆盖: Profile, 重复订阅, 机场更换订阅地址, 缓存, 旧配置, 同名节点, 删除旧Profile, 重新拉取。",
+    "coverImage": "/images/anime_journey.jpg"
+  },
+  {
+    "slug": "clash-verge-auto-start-and-auto-connect",
+    "title": "Clash Verge 怎么设置开机自启？自动连接、系统代理与启动顺序指南",
+    "category": "clash",
+    "spec": "Core: 开机自启和自动连接. 覆盖: Start with Windows, Launch at Login, System Proxy, TUN, Service, 订阅更新. 说明不同版本菜单可能不同，用概念路径描述。",
+    "coverImage": "/images/anime_train_cloud.jpg"
+  },
+  {
+    "slug": "clash-rule-provider-update-failed",
+    "title": "Clash 规则集更新失败怎么办？Rule Provider、DNS 与 GitHub 连接排查",
+    "category": "clash",
+    "spec": "Core: Rule Provider更新失败. 覆盖: Rule Provider, 远程规则, URL, DNS, GitHub, CDN, 连接超时, 配置语法, 缓存. 不要让用户执行来源不明脚本。",
+    "coverImage": "/images/anime_cyber_city.jpg"
+  },
+  {
+    "slug": "shadowrocket-how-to-test-and-choose-node",
+    "title": "Shadowrocket 怎么测速和选节点？延迟测试、连通性与实际体验指南",
+    "category": "tools",
+    "spec": "Core: 小火箭专门测速和选节点. (与完整使用教程区分). 解释: 延迟, Timeout, 连通性, 流媒体, 地区, 实际速度. 不要说延迟最低一定最好。",
+    "coverImage": "/images/anime_lofi_window.jpg"
+  },
+  {
+    "slug": "hiddify-how-to-import-subscription",
+    "title": "Hiddify 怎么导入机场订阅？Windows 与 Android 添加配置指南",
+    "category": "tools",
+    "spec": "Core: Hiddify导入订阅. 覆盖: Subscription URL, Profile, 导入, 更新, 节点, 系统代理/VPN模式概念. 不要复制完整的hiddify使用教程内容。",
+    "coverImage": "/images/anime_ocean_train.jpg"
+  },
+  {
+    "slug": "hiddify-tun-connected-no-internet",
+    "title": "Hiddify 已连接但不能上网怎么办？TUN、DNS 与路由排查指南",
+    "category": "tools",
+    "spec": "Core: Hiddify Connected但不能上网. 覆盖: TUN, DNS, 节点, 路由, Windows, Android, 其他VPN冲突。",
+    "coverImage": "/images/anime_sci_fi_dawn.jpg"
+  },
+  {
+    "slug": "openclash-subscription-update-failed",
+    "title": "OpenClash 更新订阅失败怎么办？URL、DNS、规则与软路由排查",
+    "category": "tools",
+    "spec": "Core: OpenClash更新订阅失败. 覆盖: OpenWrt, OpenClash, 订阅URL, 配置下载, DNS, 路由器网络, 空间, 时间, 证书, 订阅服务器. 不要让用户随意执行网络上不明shell command。",
+    "coverImage": "/images/network-1.jpg"
+  },
+  {
+    "slug": "v2rayn-tun-connected-no-internet",
+    "title": "v2rayN 开 TUN 后不能上网怎么办？虚拟网卡、DNS 与路由排查",
+    "category": "tools",
+    "spec": "Core: v2rayN TUN模式连上不能上网. (与现有订阅更新失败文章完全分开，本篇只负责TUN/网络排查)。",
+    "coverImage": "/images/network-2.jpg"
+  },
+  {
+    "slug": "quantumult-x-subscription-update-failed",
+    "title": "Quantumult X 订阅更新失败怎么办？节点为空与资源更新排查",
+    "category": "tools",
+    "spec": "Core: QuanX订阅更新失败. 覆盖: Resource, Subscription, 节点, 策略, 网络, URL, 证书, DNS, iOS权限. 不要复制Shadowrocket的文章。",
+    "coverImage": "/images/network-3.jpg"
+  },
+  {
+    "slug": "surge-module-install-update-failed",
+    "title": "Surge 模块安装或更新失败怎么办？Module、URL 与 MITM 基础排查",
+    "category": "tools",
+    "spec": "Core: Surge Module安装/更新失败. 覆盖: Module, URL, 远程资源, MITM概念, 证书, 规则, 更新, 版本兼容. 安全强调不要安装来源不明Module。",
+    "coverImage": "/images/network-4.jpg"
+  },
+  {
+    "slug": "esim-installed-but-no-network",
+    "title": "eSIM 安装成功却没有网络怎么办？数据漫游、APN 与线路激活排查",
+    "category": "guides",
+    "spec": "Core: eSIM装完没网络. (与选购指南区分). 覆盖: Activation, Data Roaming, APN, Primary SIM, Cellular Data, Network Selection, Restart, 有效期, 覆盖地区。",
+    "coverImage": "/images/clash-1.jpg"
+  },
+  {
+    "slug": "esim-hotspot-not-working",
+    "title": "eSIM 为什么不能开热点？个人热点、APN 与运营商限制怎么判断",
+    "category": "guides",
+    "spec": "Core: eSIM开不了热点. 解释: Hotspot, Tethering, APN, 运营商限制, 设备设置, Data-only eSIM. 不要承诺所有eSIM支持热点。",
+    "coverImage": "/images/clash-2.jpg"
+  },
+  {
+    "slug": "overseas-verification-code-not-received",
+    "title": "海外网站验证码收不到怎么办？邮箱、短信与 OTP 常见问题排查",
+    "category": "guides",
+    "spec": "Core: 海外验证码收不到. 覆盖: Email OTP, SMS OTP, Spam, Delay, 国际短信, 号码格式, 国家码, 服务商限制, 邮箱过滤, 重试次数. 禁止推荐验证码接码平台/绕过KYC/购买非法号码。",
+    "coverImage": "/images/clash-3.jpg"
+  },
+  {
+    "slug": "3d-secure-verification-failed",
+    "title": "3D Secure 验证失败怎么办？海外刷卡 OTP、银行风控与付款排查",
+    "category": "guides",
+    "spec": "Core: 3DS验证失败. (与一般付款失败区分). 专门讲: 3DS, OTP, Bank App Approval, Issuer, Merchant, Authentication Failed. 禁止绕过银行验证。",
+    "coverImage": "/images/clash-4.jpg"
+  },
+  {
+    "slug": "app-store-region-changed-but-app-unavailable",
+    "title": "Apple ID 已经改区，为什么 App Store 还是搜不到应用？",
+    "category": "guides",
+    "spec": "Core: Apple ID改区后依然搜不到App. 重点: 旧区缓存, Media & Purchases, 设备登录, App已下架, 设备兼容, 年龄限制, 开发者地区限制. 不要引导共享陌生Apple ID。",
+    "coverImage": "/images/tools-1.jpg"
+  },
+  {
+    "slug": "google-play-country-not-changing",
+    "title": "Google Play 国家地区为什么没有变化？改区后商店仍是旧区怎么排查",
+    "category": "guides",
+    "spec": "Core: Google Play改区后仍是旧区. 重点: Google Play, Payments Profile, Cache, Account, Device, Region, 官方地区切换规则. 不要写死不确定的时间限制数字。",
+    "coverImage": "/images/tools-2.jpg"
+  },
+  {
+    "slug": "chatgpt-login-works-but-chat-not-working",
+    "title": "ChatGPT 能登录却不能聊天怎么办？消息发送失败、网络错误与账号排查",
+    "category": "guides",
+    "spec": "Core: ChatGPT已登录但发送消息失败. 覆盖: Something went wrong, Network Error, 一直转圈, 模型列表异常, 网页与App不一致怎么判断。",
+    "coverImage": "/images/guides-1.jpg"
+  },
+  {
+    "slug": "claude-not-available-troubleshooting",
+    "title": "Claude 打不开或提示地区不可用怎么办？账号、网络与服务范围排查",
+    "category": "guides",
+    "spec": "Core: Claude打不开/地区不可用. 覆盖: 登录, 地区支持, 网络, 浏览器, Cookie, 账号状态, 服务故障. 禁止提供绕过官方地区限制的方法。",
+    "coverImage": "/images/nav-network-v2.jpg"
+  },
+  {
+    "slug": "gemini-not-available-troubleshooting",
+    "title": "Gemini 无法使用怎么办？地区、Google 账号与网络问题排查指南",
+    "category": "guides",
+    "spec": "Core: Gemini无法使用排查. 覆盖: Gemini, Google Account, 地区, Workspace, 年龄, 账号类型, 网络, Cookie, App/Web. 不要把Gemini/Google Search/Play混为一谈。",
+    "coverImage": "/images/nav-clash-v2.jpg"
+  }
+]

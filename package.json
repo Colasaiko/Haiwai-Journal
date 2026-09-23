@@ -12,7 +12,8 @@
     "lint": "next lint",
     "deploy": "npm run build && wrangler deploy",
     "seo:check": "node scripts/check-seo.js && node scripts/check-sitemap.js",
-    "indexnow": "node scripts/indexnow.js"
+    "indexnow": "node scripts/indexnow.js",
+    "indexnow:submit": "node scripts/indexnow.js --submit"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.20",

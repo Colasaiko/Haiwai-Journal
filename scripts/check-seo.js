@@ -37,6 +37,7 @@ const metrics = {
   missingCanonical: 0,
   invalidCanonical: 0,
   wrongDomainCanonical: 0,
+  nonSelfCanonical: 0,
   missingLang: 0,
   internalLinks: 0,
   brokenInternalLinks: 0,
@@ -100,10 +101,25 @@ htmlFiles.forEach(file => {
       metrics.missingCanonical++;
     }
   } else {
+    
     const canonical = canonicalMatch[1];
     if (!canonical.startsWith('https://haiwaijichang.online')) {
       metrics.wrongDomainCanonical++;
     }
+    
+    let p = file.replace(/\\/g, '/').replace(/^out/, '').replace(/\.html$/, '').replace(/\/index$/, '');
+    let expectedP = p;
+    if (expectedP === '') expectedP = '/';
+    let expectedCan = ('https://haiwaijichang.online' + expectedP);
+    if (expectedP !== '/') expectedCan = expectedCan.replace(/\/$/, '');
+    
+    if (canonical !== expectedCan && canonical !== expectedCan + '/' && canonical !== expectedCan.replace(/\/$/, '')) {
+      if (!file.includes('404') && !file.includes('/go/') && !file.includes('\\go\\')) {
+        metrics.nonSelfCanonical++;
+        console.error('Non-self canonical on: ' + p + ' | Expected: ' + expectedCan + ' | Found: ' + canonical);
+      }
+    }
+
     try {
       new URL(canonical);
     } catch {
@@ -208,7 +224,7 @@ console.log(JSON.stringify(metrics, null, 2));
 
 const failConditions = [
   'missingTitle', 'duplicateTitle', 'missingDescription', 'duplicateDescription',
-  'missingH1', 'multipleH1', 'missingCanonical', 'invalidCanonical', 'wrongDomainCanonical',
+  'missingH1', 'multipleH1', 'missingCanonical', 'invalidCanonical', 'wrongDomainCanonical', 'nonSelfCanonical',
   'missingLang', 'brokenInternalLinks', 'brandArticleLinkErrors', 'compareLinkErrors',
   'missingLocalImage', 'emptyImageFiles', 'schemaParseErrors', 'fakeReviewRatingSchema'
 ];
