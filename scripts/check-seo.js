@@ -205,4 +205,24 @@ Object.values(descriptions).forEach(count => {
 });
 
 console.log(JSON.stringify(metrics, null, 2));
-if (metrics.brokenInternalLinks > 0 || metrics.missingTitle > 0 || metrics.duplicateTitle > 0 || metrics.missingDescription > 0 || metrics.multipleH1 > 0 || metrics.missingCanonical > 0 || metrics.invalidCanonical > 0 || metrics.wrongDomainCanonical > 0 || metrics.missingLocalImage > 0 || metrics.schemaParseErrors > 0 || metrics.brandArticleLinkErrors > 0 || metrics.compareLinkErrors > 0) process.exitCode = 1;
+
+const failConditions = [
+  'missingTitle', 'duplicateTitle', 'missingDescription', 'duplicateDescription',
+  'missingH1', 'multipleH1', 'missingCanonical', 'invalidCanonical', 'wrongDomainCanonical',
+  'missingLang', 'brokenInternalLinks', 'brandArticleLinkErrors', 'compareLinkErrors',
+  'missingLocalImage', 'emptyImageFiles', 'schemaParseErrors', 'fakeReviewRatingSchema'
+];
+
+let failed = false;
+failConditions.forEach(c => {
+  if (metrics[c] > 0) {
+    console.error(`HARD FAIL: ${c} = ${metrics[c]}`);
+    failed = true;
+  }
+});
+
+if (failed) {
+  process.exitCode = 1;
+} else {
+  console.log('All Hard SEO checks passed!');
+}

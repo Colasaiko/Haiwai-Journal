@@ -25,7 +25,7 @@ export function generateMetadata({ params }: { params: { category: string, slug:
   try {
     const post = getPostBySlug(params.slug);
     return {
-      title: `${post.title}｜${getCategoryBySlug(post.category)?.title || "海外志"} - 海外志`,
+      title: `${post.title}｜海外志`,
       description: post.description,
       openGraph: {
         title: post.title,
@@ -37,7 +37,13 @@ export function generateMetadata({ params }: { params: { category: string, slug:
         modifiedTime: post.updated || undefined,
         authors: [post.author],
       },
-      alternates: {
+      twitter: {
+          card: 'summary_large_image',
+          title: post.title,
+          description: post.description,
+          images: [post.coverImage]
+        },
+        alternates: {
         canonical: `https://haiwaijichang.online/${params.category}/${params.slug}`,
       }
     };

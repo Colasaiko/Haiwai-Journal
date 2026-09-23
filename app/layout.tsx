@@ -8,6 +8,20 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://haiwaijichang.online'),
   title: "海外志｜海外机场、网络知识与 Clash 使用指南",
   description: "海外志是一个围绕海外机场、网络知识、Clash 教程、软件工具与海外数字生活展开的中文内容 Blog，提供实用教程、概念解释、选择建议与使用经验。",
+  openGraph: {
+    siteName: '海外志',
+    locale: 'zh_CN',
+    type: 'website',
+    images: [{
+      url: '/images/anime_desk.jpg',
+      width: 1200,
+      height: 630,
+      alt: '海外志'
+    }]
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
   alternates: {
     canonical: 'https://haiwaijichang.online',
   },

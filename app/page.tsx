@@ -3,12 +3,27 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/mdx';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = { alternates: { canonical: "https://haiwaijichang.online/" },
   title: '2026 机场推荐｜稳定、便宜、专线机场测评 - 海外志',
   description: '海外志整理 2026 机场推荐、稳定机场、便宜机场、IPLC / IEPL 专线机场、Clash 订阅、流媒体与 AI 使用场景，并提供品牌档案、套餐资料与机场对比。',
 };
 
 export default function Home() {
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: '海外志',
+    alternateName: 'HAIWAI JOURNAL',
+    url: 'https://haiwaijichang.online/',
+    inLanguage: 'zh-CN'
+  };
+  const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: '海外志',
+    url: 'https://haiwaijichang.online/'
+  };
+
   const posts = getAllPosts();
   const heroPost = posts.find(p => p.slug === 'peak-hours-stable-airport-recommendations') || posts[0];
   const featuredPosts = posts.filter(p => p.slug !== heroPost.slug).slice(0, 4);
@@ -35,6 +50,7 @@ export default function Home() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([websiteSchema, orgSchema]) }} />
       
       <div className="px-4 md:px-0 mt-4 mb-8">
         <span className="text-blue-600 font-bold text-sm tracking-wider uppercase mb-2 block">海外志 / HAIWAI JOURNAL</span>

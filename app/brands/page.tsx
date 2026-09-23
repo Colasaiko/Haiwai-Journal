@@ -3,7 +3,7 @@ import BrandListClient from './BrandListClient';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = { alternates: { canonical: 'https://haiwaijichang.online/brands' },
   title: '机场品牌资料库｜海外志',
   description: '整理海外志目前收录的机场品牌、套餐、线路特点与公开资料，方便按自己的需求进一步了解与比较。',
 };
